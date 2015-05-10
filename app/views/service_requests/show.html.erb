@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @service_request.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @service_request.description %>
+</p>
+
+<p>
+  <strong>Estimated hours:</strong>
+  <%= @service_request.estimated_hours %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @service_request.location %>
+</p>
+
+<p>
+  <strong>Timing:</strong>
+  <%= @service_request.timing %>
+</p>
+
+<p>
+  <strong>Requested by:</strong>
+  <%= @service_request.requested_by_id %>
+</p>
+
+<%= link_to 'Edit', edit_service_request_path(@service_request) %> |
+<%= link_to 'Back', service_requests_path %>
