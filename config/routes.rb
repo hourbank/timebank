@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
 
+  root to: "service_requests#index" # change this once we have some better page to start
   devise_for :users
   resources :service_requests
-  root to: "users#index" # change this once we have some better page to start
 
   
   # The priority is based upon order of creation: first created -> highest priority.
