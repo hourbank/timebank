@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   root to: "service_requests#index" # change this once we have some better page to start
   devise_for :users
   resources :service_requests
+  get "/users", to: "users#index" # Show all users is not part of Devise set of Routes
+
 
   
   # The priority is based upon order of creation: first created -> highest priority.
