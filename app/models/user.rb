@@ -6,8 +6,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # For Paperclip file attachment as profile "avatar"
-  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
-  validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
+  #has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
+  #validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
   # For associations with Exchange (2 separate 1:many relationships)
   has_many :exchanges_provided, class_name: "Exchange", foreign_key: "provided_by_id"
