@@ -17,6 +17,5 @@ class User < ActiveRecord::Base
   has_many :service_requests, class_name: "ServiceRequest", foreign_key: "requested_by_id"
 
   # Allow access to all these attributes
-  attr_reader :first_name, :last_name, :email, :phone, :services_offered, :city, :zipcode, :hours_balance
-
+  #attr_reader :first_name, :last_name, :email, :phone, :services_offered, :city, :zipcode, :hours_balance
 end

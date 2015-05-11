@@ -3,7 +3,7 @@ class Exchange < ActiveRecord::Base
   belongs_to :recipient, class_name: "User", foreign_key: "received_by_id"
 
   # Allow access to all these attributes
-  attr_reader :estimated_hours, :final_hours, :description, :proposed, :proposed_date, :accepted, :accepted_date, :delivered, :delivered_date, :confirmed, :confirmed_date, :service_request_id
+  # attr_reader :estimated_hours, :final_hours, :description, :proposed, :proposed_date, :accepted, :accepted_date, :delivered, :delivered_date, :confirmed, :confirmed_date, :service_request_id
   #if we add these fields to Exchange table-->  :location, :timing,:title
 
   def stage
