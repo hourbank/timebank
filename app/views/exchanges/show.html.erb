@@ -1,0 +1,26 @@
+<h1>This is the Exchange show page</h1>
+
+<%= @exchange.description %>
+Provided by: <%= @exchange.provider.first_name %>
+
+<% if @exchange.stage.stage_number >= 2 %>
+<%= @exchange.provider.email %>
+<% end %>
+
+<br>
+
+For: <%= @exchange.recipient.first_name %>
+
+<% if @exchange.stage.stage_number >= 2 %>
+<%= @exchange.recipient.email %>
+<% end %>
+
+<br>
+
+Estimated hours: <%= @exchange.estimated_hours %>
+Final hours: <%= @exchange.final_hours %>
+
+Proposed on: <%= @exchange.proposed_date %>
+Accepted on: <%= @exchange.accepted_date %>
+Delivered on: <%= @exchange.delivered_date %>
+Confirmed on: <%= @exchange.confirmed_date %>
