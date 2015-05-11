@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   # Manual routes for all the rest
   get "/users", to: "users#index" # Show all users is not part of Devise set of Routes
-  
+  get "/users/account", to: "users#account"
+  # Also need post/get routes for edit view of users#account
   
 end
