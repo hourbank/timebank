@@ -28,6 +28,8 @@ gem 'paperclip', "~> 4.2"
 gem 'devise'
 # Pundit for user authorization
 gem 'pundit'
+# Twilio for SMS texting from application
+gem 'twilio-ruby', '~> 4.1.0'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -47,5 +49,6 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
 end
 
