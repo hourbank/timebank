@@ -19,11 +19,11 @@ class ApplicationController < ActionController::Base
   	account_sid = 'ACd9d81b036bad423457caf7ec9f506227' 
   	auth_token = '2e9b24ce85e18f2e6773043efe25bca8'
 
-	@client = Twilio::REST::Client.new account_sid, auth_token
+	  @client = Twilio::REST::Client.new account_sid, auth_token
 
-	message = @client.account.messages.create(
-		:body => message,
-		:to => "+1" + phone,
-		:from => "+14155992671")
+	  message = @client.account.messages.create(
+		 :body => message,
+		 :to => "+1" + phone,
+		 :from => "+14155992671")
   end
 end

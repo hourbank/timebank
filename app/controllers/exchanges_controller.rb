@@ -1,12 +1,14 @@
 class ExchangesController < ApplicationController
 
-	def proposal_by_provider(service_request_id)
+	def proposal_by_provider
+		which_sr = params[:id]
 		#Create new record in Exchange
 
-		which_service_request = ServiceRequest.find(service_request_id)
+		which_service_request = ServiceRequest.find(which_sr)
+		#which_service_request = service_request
 
 		@proposed_exchange = Exchange.create({
-			provided_by_id: #need current user id,
+			provided_by_id: current_user.id,
 			received_by_id: which_service_request.requested_by_id,
 			estimated_hours: which_service_request.estimated_hours,
 			description: which_service_request.description,
@@ -18,7 +20,7 @@ class ExchangesController < ApplicationController
 			accepted: false,
 			delivered: false,
 			confirmed: false,
-			service_request_id: service_request_id
+			service_requested_id: which_sr
 			})
 
 		#Send SMS to Recipient (i.e., person getting service)
@@ -33,7 +35,5 @@ class ExchangesController < ApplicationController
 
 	def show
 		@exchange = Exchange.find(params[:id])
-	end
-
 	end
 end
