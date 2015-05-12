@@ -10,19 +10,22 @@ class Exchange < ActiveRecord::Base
 	# This method takes in an exchange object and returns a hash with two key:values
 	# "stage_name" ==> which is "Proposed" "Accepted" "Delievered" or "Confirmed"
 	# "stage_number" ==> which is 1, 2 3 or 4 (in the same order)
+	#byebug
 
-	if this.confirmed
-		@current_stage = {"stage_name":"Confirmed","stage_number":4}
-	elsif this.delivered
-		@current_stage = {"stage_name":"Delivered","stage_number":3}
-	elsif this.accepted
-		@current_stage = {"stage_name":"Accepted","stage_number":2}
-	elsif this.proposed
-		@current_stage = {"stage_name":"Proposed","stage_number":1}
-	else 
-		#Hopefully the following line will never be used
-		@current_stage = {"stage_name":"Error with Exchange","stage_number":0}
+		if self.confirmed
+			@current_stage = {"stage_name":"Confirmed","stage_number":4}
+		elsif self.delivered
+			@current_stage = {"stage_name":"Delivered","stage_number":3}
+		elsif self.accepted
+			@current_stage = {"stage_name":"Accepted","stage_number":2}
+		elsif self.proposed
+			@current_stage = {"stage_name":"Proposed","stage_number":1}
+		else 
+			#Hopefully the following line will never be used
+			@current_stage = {"stage_name":"Error with Exchange","stage_number":0}
+		end
+
+		return @current_stage
 	end
-end
 
 end

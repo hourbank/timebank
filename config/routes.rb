@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get "/users/account", to: "users#account"
   # Also need post/get routes for edit view of users#account
 
-  get "/exchanges/:id/create", to: "exchanges#proposal_by_provider", as: 'exchanges_create'
+  get "/exchanges/:id/create", to: "exchanges#proposal_by_provider", as: 'create_exchange'
+  get "/exchanges/:id", to: "exchanges#show", as: 'exchange'
   
 end

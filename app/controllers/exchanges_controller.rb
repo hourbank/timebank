@@ -30,10 +30,13 @@ class ExchangesController < ApplicationController
 		send_sms_to(which_service_request.recipient, message)
 
 		#Redirect to Exchange show page
-		redirect_to @proposed_exchange
+		#redirect_to 'exchange_path'
+		redirect_to exchange_path(@proposed_exchange) #@proposed_exchange
 	end
 
 	def show
+		#byebug
 		@exchange = Exchange.find(params[:id])
+		#byebug
 	end
 end

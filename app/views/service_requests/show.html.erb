@@ -30,11 +30,8 @@
   <%= @service_request.requested_by_id %>
 </p>
 
-Vikash is awesome
-<%= @service_request %>
-
 <%= link_to 'Edit', edit_service_request_path(@service_request) %> |
 <%= link_to 'Back', service_requests_path %>
 
 <br>
-<%= link_to 'I can help with this!', exchanges_create_path(@service_request) %>
+<%= link_to 'I can help with this!', create_exchange_path(@service_request) %>
