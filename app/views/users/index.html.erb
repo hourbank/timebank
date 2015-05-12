@@ -1,12 +1,13 @@
-Show all users
+<br><br><br><br>
+<!-- this should be placeholder text; think of better heading -->
+<h1>Show all users</h1>
 
-	Note only showing email temporarily until other fields have data
-<%= @all_users.each do |u| %>
-	<div><%= u.first_name%> <%= u.last_name%>
-	<%=u.services_offered%>
-	
-	</div>
+<% @all_users.each do |u| %>
+  <div>
+    <a href="/users/<%= u.id %>"><strong><%= u.first_name %></strong></a>, 
+    <%= u.city %><br>
+    Offers: <%=u.services_offered %>
+   <br><br>
+  </div>
 
 <% end %>
-	
-	Note: Current user is <%= current_user %>

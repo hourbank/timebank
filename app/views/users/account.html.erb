@@ -1,0 +1,63 @@
+<br><br><br>
+
+<h1>Welcome, <%=@user.first_name %>!</h1>
+<br>
+
+<h3>You currently have <%= @user.time_balance %> hours in your account!</h3>
+<br>
+
+<div>
+  <h4>Account Information</h4>
+  <p>
+    Name: <%= @user.first_name %> <%= @user.last_name %><br>
+    Email: <%= @user.email %><br>
+    Phone: <%= @user.phone %><br>
+    Services offered: <%= @user.services_offered %><br>
+    City: <%= @user.city %><br>
+    Zipcode: <%= @user.zipcode %><br>
+    <%= link_to "Edit", edit_registration_path(@user) %>
+  </p>
+  <p><%= link_to "View Profile", user_path(@user) %></p>
+</div>
+<br>
+
+<div>
+  <h4>Your current service requests</h4>
+  <p>
+    <% @requests.where(:requested_by_id => @user.id).each do |r| %>
+      <div>
+        <strong><%= r.title %></strong><br>
+        <%= r.created_at %><br>
+        <%= r.description %><br>
+        Estimate hours: <%= r.estimated_hours %><br>
+        Location: <%= r.location %><br>
+        Timing: <%= r.timing %><br>   
+        <%= link_to "Edit", edit_service_request_path(r) %> | <%= link_to "Destroy", r, method: :delete, data: { confirm: "Are you sure?" } %>   
+      </div><br>
+    <% end %>
+  </p>
+</div>
+<br>
+
+<div>
+  <h4>Your Exchanges</h4>
+  <p>
+    <% @exchanges.each do |e| %>
+      <%= e.created_at %>
+      <a href="/exchanges/<%= e.id %>"><%= e.title %></a>
+      <% if e.provided_by_id == @user.id %>
+        Recipient: <%= e.received_by_id.first_name %>
+      <% elsif e.received_by_id == @user.id %>
+        Provider: <%= e.provided_by_id.first_name %>
+      <% end %>
+      <% if e.confirmed == true %>
+        Status: Confirmed
+      <% elsif e.delivered == true %>
+        Status: Delivered, pending confirmation
+      <% elsif e.accepted == true %>
+        Status: Accepted, pending delivery
+      <% else %>
+        Status: Proposed, pending acceptance  
+    <% end %>
+  </p>
+</div>

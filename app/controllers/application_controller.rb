@@ -1,4 +1,9 @@
 class ApplicationController < ActionController::Base
+  # Prevent CSRF attacks by raising an exception.
+  # For APIs, you may want to use :null_session instead.
+  protect_from_forgery with: :exception
+
+  # allow Devise to add additional user sign up fields
   before_filter :configure_devise_params, if: :devise_controller?
     def configure_devise_params
       devise_parameter_sanitizer.for(:sign_up) do |u|
@@ -6,9 +11,9 @@ class ApplicationController < ActionController::Base
       end
     end
 
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
-  protect_from_forgery with: :exception
+    def after_sign_in_path_for(resource)
+      '/service_requests'
+    end
 
   def send_sms_to(user,message)
   	# Expecting that user parameter is the OBJECT of the user to receive the message
