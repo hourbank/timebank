@@ -57,7 +57,6 @@ class Exchange < ActiveRecord::Base
 
   end
 
-
   def sufficient_balance?
   	# Check to see if the RECIPIENT of the proposed Exchange has enough hours in his/her account to handle this exchange
   	# "Enough" means a) time_balance - estimated_hours >= -2 and b) time_balance > 0

@@ -2,7 +2,7 @@
 <br>
 <h1>This is the Exchange show page</h1>
 
-<%= @exchange.description %>
+<h2><%= @exchange.title %></h2>
 Provided by: <%= @exchange.provider.first_name %>
 
 <% if @exchange.stage[:stage_number] >= 2 %>
@@ -16,6 +16,11 @@ For: <%= @exchange.recipient.first_name %>
 <% if @exchange.stage[:stage_number] >= 2 %>
 <%= @exchange.recipient.email %>
 <% end %>
+
+<br>
+Description: <%= @exchange.description %>
+<br>
+Location: <%= @exchange.location %>
 
 <br>
 
