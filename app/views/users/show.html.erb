@@ -1,0 +1,25 @@
+<br><br><br><br>
+
+<h2><%= @user.first_name %></h2>
+<p><%= @user.city %><br>
+[# of exchanges completed]</p>
+<br>
+<p>What I can do for you:<br>
+<%= @user.services_offered %></p>
+
+<p>[Button to request help]</p>
+
+<br>
+
+<h3>Service requests</h3>
+<% @requests.where(:requested_by_id => @user.id).each do |r| %>
+  <div>
+    <a href="/service_requests/<%= r.id %>"><strong><%= r.title %></strong></a>
+    <%= r.created_at %><br>
+    <%= r.description %><br>
+    Estimate hours: <%= r.estimated_hours %><br>
+    Location: <%= r.location %><br>
+    Timing: <%= r.timing %><br>      
+  </div>
+<% end %>
+

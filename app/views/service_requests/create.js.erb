@@ -1,0 +1,6 @@
+// Created page in order to render js data:
+// insert the new service_request into the index template
+${'#srs'}.append('<%= j render(@service_request) %>');
+// to post newly created service requests to the srs class (table) upon creation:
+$.post("/service_requests",$("srs").serialize());
+

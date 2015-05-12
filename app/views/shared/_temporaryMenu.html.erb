@@ -42,3 +42,19 @@
         </div>
         <!-- /.container -->
     </nav>
+<br>
+<br>
+<a href="/">TimeBank</a> | 
+<a href="/users/sign_up">Sign up</a> | 
+<a href="/users/sign_in">Log in</a> | 
+<a href="/service_requests">See all service requests</a> | 
+<a href="/service_requests/new">Post a new service request</a> | 
+<a href="/users">See all users</a> | 
+<a href="/users/account">View account</a> | 
+<%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+<% if user_signed_in? %>
+<br>Current user:<%= current_user.first_name %>, Id <%= current_user.id %>
+<% else %>
+<br>No user currently logged in
+<% end %>
+
