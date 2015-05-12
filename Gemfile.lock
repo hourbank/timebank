@@ -40,8 +40,6 @@ GEM
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bootstrap-navbar (2.2.4)
-      gem_config (~> 0.3)
     builder (3.2.2)
     byebug (4.0.5)
       columnize (= 0.9.0)
@@ -67,7 +65,6 @@ GEM
       warden (~> 1.2.3)
     erubis (2.7.0)
     execjs (2.5.2)
-    gem_config (0.3.1)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
     i18n (0.7.0)
@@ -121,9 +118,6 @@ GEM
       rails-deprecated_sanitizer (>= 1.0.1)
     rails-html-sanitizer (1.0.2)
       loofah (~> 2.0)
-    rails_bootstrap_navbar (2.0.1)
-      bootstrap-navbar (~> 2.0)
-      rails (>= 3.0.0)
     railties (4.2.1)
       actionpack (= 4.2.1)
       activesupport (= 4.2.1)
@@ -185,7 +179,6 @@ DEPENDENCIES
   pg
   pundit
   rails (= 4.2.1)
-  rails_bootstrap_navbar
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spring
