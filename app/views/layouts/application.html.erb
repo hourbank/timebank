@@ -46,13 +46,13 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="#about">About</a>
+                        <%= link_to "About", about_path %>
                     </li>
                     <li>
-                        <a href="#services">Contact</a>
+                        <%= link_to "Contact", contact_path %>
                     </li>
                     <li>
-                        <a href="#contact">Log In/Sign Up</a>
+                        <a href="/users/sign_up">Log In/Sign Up</a>
                     </li>
                 </ul>
             </div>
@@ -80,7 +80,7 @@
                         <a href="#services">Contact</a>
                     </li>
                     <li>
-                        <a href="#contact">Log In/Sign Up</a>
+                        <a href="/users/sign_up">Log In/Sign Up</a>
                     </li>
                     </ul>
                     <p class="copyright text-muted small">Copyright &copy; GA WDI Team 2 2015. All Rights Reserved.</p>

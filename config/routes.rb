@@ -11,6 +11,14 @@ Rails.application.routes.draw do
 
   # Manual routes for all the rest
   get "/users", to: "users#index" # Show all users is not part of Devise set of Routes
+
+  get "/about", to: "site#about"
+  get "/contact", to: "site#contact"
+
+  # def get(url, controller={}, path={}, via={})
+  #   ...
+  #   via = "GET"
+  # end
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
