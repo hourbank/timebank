@@ -23,7 +23,7 @@
         <td><%= service_request.estimated_hours %></td>
         <td><%= service_request.location %></td>
         <td><%= service_request.timing %></td>
-        <td><%= service_request.requested_by_id %></td>
+        <td><%= service_request.recipient %></td>
         <td><%= link_to 'Show', service_request %></td>
         <td><%= link_to 'Edit', edit_service_request_path(service_request) %></td>
         <td><%= link_to 'Destroy', service_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
