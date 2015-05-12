@@ -1,6 +1,7 @@
-Show all users
+<br>
+<br>
+<h1>Show all users</h1>
 
-	Note only showing email temporarily until other fields have data
 <%= @all_users.each do |u| %>
 	<div><%= u.first_name%> <%= u.last_name%>
 	<%=u.services_offered%>
@@ -8,5 +9,3 @@ Show all users
 	</div>
 
 <% end %>
-	
-	Note: Current user is <%= current_user %>

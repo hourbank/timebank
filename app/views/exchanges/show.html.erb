@@ -24,3 +24,18 @@ Proposed on: <%= @exchange.proposed_date %>
 Accepted on: <%= @exchange.accepted_date %>
 Delivered on: <%= @exchange.delivered_date %>
 Confirmed on: <%= @exchange.confirmed_date %>
+
+<!-- BUTTONS TO MOVE EXCHANGE FORWARD WITH VIEW LOGIC -->
+
+<!-- ACCEPT a proposed exchange -->
+<!-- Only allow the counter-party to the Proposed Exchange to accept (i.e., the person who did not propose it) -->
+
+<% if @exchange.stage[:stage_number] = 1 %>
+<% byebug %>
+	<% if @exchange.accepting_party = current_user %>
+
+	<%= link_to 'Accept this proposal', accept_exchange_path(@exchange) %>
+
+	<% end %>
+<% end %>
+
