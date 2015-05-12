@@ -1,3 +1,4 @@
+
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Service Requests</h1>
@@ -17,13 +18,13 @@
 
   <tbody>
     <% @service_requests.each do |service_request| %>
-      <tr>
+      <tr id='srs'>
         <td><%= service_request.title %></td>
         <td><%= service_request.description %></td>
         <td><%= service_request.estimated_hours %></td>
         <td><%= service_request.location %></td>
-        <td><%= service_request.timing %></td>
-        <td><%= service_request.recipient %></td>
+        <td><%= service_request.timing %></td>       
+        <td><%= service_request.recipient.first_name %></td>
         <td><%= link_to 'Show', service_request %></td>
         <td><%= link_to 'Edit', edit_service_request_path(service_request) %></td>
         <td><%= link_to 'Destroy', service_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -33,5 +34,5 @@
 </table>
 
 <br>
-
-<%= link_to 'New Service request', new_service_request_path %>
+<!-- Added form to index page to render new service request on same page after creation: -->
+<%= render 'form' %>
