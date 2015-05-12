@@ -257,4 +257,9 @@ h4 {
     text-align: center;
 }
 
+.image {
+    padding: 25px;
+    position: fixed;
+}
+
 
