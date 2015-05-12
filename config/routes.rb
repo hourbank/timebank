@@ -14,10 +14,6 @@ Rails.application.routes.draw do
   get "/about", to: "site#about"
   get "/contact", to: "site#contact"
 
-  # def get(url, controller={}, path={}, via={})
-  #   ...
-  #   via = "GET"
-  # end
   get "/users/account", to: "users#account"
   # Also need post/get routes for edit view of users#account
   

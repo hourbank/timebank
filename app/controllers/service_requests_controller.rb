@@ -27,7 +27,7 @@ class ServiceRequestsController < ApplicationController
     # Insert current user ID into params for new service request
     new_sr = service_request_params
     new_sr[:requested_by_id] = current_user.id
-    @service_request = ServiceRequest.new(service_request_params)
+    @service_request = ServiceRequest.new(new_sr)
 
     respond_to do |format|
       if @service_request.save
