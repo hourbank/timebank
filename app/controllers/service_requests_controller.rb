@@ -5,6 +5,7 @@ class ServiceRequestsController < ApplicationController
   # GET /service_requests.json
   def index
     @service_requests = ServiceRequest.all
+    @service_request = ServiceRequest.new
   end
 
   # GET /service_requests/1
@@ -31,8 +32,10 @@ class ServiceRequestsController < ApplicationController
 
     respond_to do |format|
       if @service_request.save
-        format.html { redirect_to @service_request, notice: 'Service request was successfully created.' }
+        format.html { redirect_to '/service_requests', notice: 'Service request was successfully created.' }
         format.json { render :show, status: :created, location: @service_request }
+        # adding this and leaving it blank to render out the template for a new view file:
+        format.js
       else
         format.html { render :new }
         format.json { render json: @service_request.errors, status: :unprocessable_entity }
