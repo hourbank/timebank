@@ -7,9 +7,6 @@ class ExchangesController < ApplicationController
 		which_service_request = ServiceRequest.find(which_sr)
 		#which_service_request = service_request
 
-		byebug
-		# CHECK WHAT which_sr is
-
 		@proposed_exchange = Exchange.create({
 			provided_by_id: current_user.id,
 			received_by_id: which_service_request.requested_by_id,

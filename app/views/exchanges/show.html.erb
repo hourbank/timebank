@@ -1,3 +1,5 @@
+<br>
+<br>
 <h1>This is the Exchange show page</h1>
 
 <%= @exchange.description %>
@@ -20,6 +22,9 @@ For: <%= @exchange.recipient.first_name %>
 Estimated hours: <%= @exchange.estimated_hours %>
 Final hours: <%= @exchange.final_hours %>
 
+<br>
+<h1>Current status: <%= @exchange.stage[:stage_name] %></h1>
+
 Proposed on: <%= @exchange.proposed_date %>
 Accepted on: <%= @exchange.accepted_date %>
 Delivered on: <%= @exchange.delivered_date %>
@@ -30,12 +35,11 @@ Confirmed on: <%= @exchange.confirmed_date %>
 <!-- ACCEPT a proposed exchange -->
 <!-- Only allow the counter-party to the Proposed Exchange to accept (i.e., the person who did not propose it) -->
 
-<% if @exchange.stage[:stage_number] = 1 %>
-<% byebug %>
-	<% if @exchange.accepting_party = current_user %>
-
+<% if @exchange.stage[:stage_number] == 1 %>
+	<% if @exchange.accepting_party == current_user %>
+<h2>
 	<%= link_to 'Accept this proposal', accept_exchange_path(@exchange) %>
-
+</h2>
 	<% end %>
 <% end %>
 

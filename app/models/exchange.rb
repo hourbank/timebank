@@ -32,9 +32,6 @@ class Exchange < ActiveRecord::Base
   	# If there is a service_requested_id in the Exchange, then we know that the PROVIDER proposed (from a ServiceRequest), and RECIPIENT can accept
   	# If service_requested_id is NIL, then we know that the RECIPIENT proposed (from a profile page), and PROVIDER can accept
 
-  	puts "Yoda"
-  	puts self.service_requested_id
-
   	if self.service_requested_id == nil
   		# So RECIPIENT proposed and PROVIDER is counter-party who can accept
   		counter_party = self.provider
@@ -73,13 +70,5 @@ class Exchange < ActiveRecord::Base
 
   	return approved
   end
-
-
-
-
-
-
-
-  
 
 end
