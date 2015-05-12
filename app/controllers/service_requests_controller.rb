@@ -24,7 +24,10 @@ class ServiceRequestsController < ApplicationController
   # POST /service_requests
   # POST /service_requests.json
   def create
+    # NEED TO GET CURRENT USER
+    #byebug
     @service_request = ServiceRequest.new(service_request_params)
+#    @service_request.requested_by_id = current_user.id # This puts current user id into new Se
 
     respond_to do |format|
       if @service_request.save
