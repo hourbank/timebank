@@ -49,6 +49,24 @@ h6 {
     background-size: cover;
 }
 
+.intro-header-about {
+    padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+    padding-bottom: 50px;
+    text-align: center;
+    color: #f8f8f8;
+    background: url("/assets/jump.jpg") no-repeat center center;
+    background-size: cover;
+}
+
+.intro-header-contact {
+    padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+    padding-bottom: 50px;
+    text-align: center;
+    color: #f8f8f8;
+    background: url("/assets/payphone.jpg") no-repeat center center;
+    background-size: cover;
+}
+
 .intro-message {
     position: relative;
     padding-top: 20%;
@@ -123,6 +141,13 @@ h6 {
     border-top: 3px solid #e7e7e7;
 }
 
+.section-heading-spacer-contact {
+    float: center;
+    width: 200px;
+    padding: 30px ;
+    border-top: 3px solid #e7e7e7;
+}
+
 .banner {
     padding: 100px 0;
     color: #f8f8f8;
@@ -177,6 +202,59 @@ footer {
 
 p.copyright {
     margin: 15px 0 0;
+}
+
+.team-member {
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.team-member img {
+    margin: 0 auto;
+    border: 7px solid #000;
+}
+
+.team-member h4 {
+    margin-top: 25px;
+    margin-bottom: 0;
+    text-transform: none;
+}
+
+.team-member p {
+    margin-top: 0;
+}
+
+
+.container-login {
+    padding: 25px;
+    position: fixed;
+}
+
+.form-login {
+    background-color: #EDEDED;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 15px;
+    border-color:#d2d2d2;
+    border-width: 5px;
+    box-shadow:0 1px 0 #cfcfcf;
+}
+
+h4 { 
+ border:0 solid #fff; 
+ border-bottom-width:1px;
+ padding-bottom:10px;
+ text-align: center;
+}
+
+.form-control {
+    border-radius: 10px;
+}
+
+.wrapper {
+    text-align: center;
 }
 
 

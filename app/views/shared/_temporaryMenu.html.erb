@@ -1,7 +1,43 @@
-<a href="/">TimeBank</a>
-<a href="/users/sign_up">Sign up</a>
-<a href="/users/sign_in">Log in</a>
-<a href="/service_requests">See all service requests</a>
-<a href="/service_requests/new">Post a new service request</a>
-<a href="/users">See all users</a>
-<%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+<%= link_to "About", about_path %>
+<%= link_to "Contact", contact_path %>
+<%= link_to "Sign Up",new_user_registration_path %>
+<%= link_to "Log In", new_user_session_path %>
+                        <%= link_to "Looking for help", service_requests_path %>
+                        <%= link_to "Ask for help", new_service_request_path %>
+                        <%= link_to "All Users", users_path %>
+
+
+     <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+        <div class="container topnav">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand topnav" href="/">OurBank</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <%= link_to "About", about_path %>
+                    </li>
+                    <li>
+                        <%= link_to "Contact", contact_path %>
+                    </li>
+                    <li>
+                        <%= link_to "Sign Up",new_user_registration_path %>
+                    </li>
+                     <li>
+                        <%= link_to "Log In", new_user_session_path %>
+                    </li>
+                </ul>
+             </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
