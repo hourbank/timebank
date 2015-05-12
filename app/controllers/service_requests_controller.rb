@@ -24,6 +24,9 @@ class ServiceRequestsController < ApplicationController
   # POST /service_requests
   # POST /service_requests.json
   def create
+    # Insert current user ID into params for new service request
+    new_sr = service_request_params
+    new_sr[:requested_by_id] = current_user.id
     @service_request = ServiceRequest.new(service_request_params)
 
     respond_to do |format|
