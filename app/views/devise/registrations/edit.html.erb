@@ -1,16 +1,24 @@
+<br><br><br>
+
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+ <div class="field">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name, autofocus: true, placeholder: "First name" %>
   </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+  <div class="field">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name, placeholder: "Last name" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email %>
+  </div>
 
   <div class="field">
     <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
@@ -25,6 +33,26 @@
   <div class="field">
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
     <%= f.password_field :current_password, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :phone %><br />
+    <%= f.text_field :phone, placeholder: "Phone number" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :services_offered %><br />
+    <%= f.text_field :services_offered, placeholder: "What can you help with?" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :city %><br />
+    <%= f.text_field :city, placeholder: "City" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :zipcode %><br />
+    <%= f.text_field :zipcode, placeholder: "Zipcode" %>
   </div>
 
   <div class="actions">
