@@ -26,7 +26,7 @@
   <p>
     <% @requests.where(:requested_by_id => @user.id).each do |r| %>
       <div>
-        <strong><%= r.title %></strong><br>
+        <a href="/service_requests/<%= r.id %>"><strong><%= r.title %></strong></a>
         <%= r.created_at %><br>
         <%= r.description %><br>
         Estimate hours: <%= r.estimated_hours %><br>
@@ -46,9 +46,9 @@
       <%= e.created_at %>
       <a href="/exchanges/<%= e.id %>"><%= e.title %></a>
       <% if e.provided_by_id == @user.id %>
-        Recipient: <%= e.received_by_id.first_name %>
+        Recipient: <%= e.recipient.first_name %>
       <% elsif e.received_by_id == @user.id %>
-        Provider: <%= e.provided_by_id.first_name %>
+        Provider: <%= e.provider.first_name %>
       <% end %>
       <% if e.confirmed == true %>
         Status: Confirmed

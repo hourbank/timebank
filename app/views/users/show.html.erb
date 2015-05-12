@@ -14,7 +14,7 @@
 <h3>Service requests</h3>
 <% @requests.where(:requested_by_id => @user.id).each do |r| %>
   <div>
-    <strong><%= r.title %></strong><br>
+    <a href="/service_requests/<%= r.id %>"><strong><%= r.title %></strong></a>
     <%= r.created_at %><br>
     <%= r.description %><br>
     Estimate hours: <%= r.estimated_hours %><br>
