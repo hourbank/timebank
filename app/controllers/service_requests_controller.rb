@@ -1,4 +1,5 @@
 class ServiceRequestsController < ApplicationController
+  before_action :logged_in?
   before_action :set_service_request, only: [:show, :edit, :update, :destroy]
 
   # GET /service_requests
@@ -6,11 +7,13 @@ class ServiceRequestsController < ApplicationController
   def index
     @service_requests = ServiceRequest.all
     @service_request = ServiceRequest.new
+    @current_user = current_user
   end
 
   # GET /service_requests/1
   # GET /service_requests/1.json
   def show
+    @current_user = current_user
   end
 
   # GET /service_requests/new
@@ -64,6 +67,13 @@ class ServiceRequestsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to service_requests_url, notice: 'Service request was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def logged_in?
+    if !user_signed_in?
+      flash[:error] = "Please sign in first!"
+      redirect_to "/users/sign_in"
     end
   end
 
