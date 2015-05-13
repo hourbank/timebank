@@ -3,7 +3,6 @@
     <div class="panel panel-default">
       <div class="panel-heading"><h3 class="panel-title"><strong>Sign Up </strong></h3></div>
         <div class="panel-body">
-          <form role="form">
             <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
             <%= devise_error_messages! %>
 
@@ -61,7 +60,6 @@
           <% end %>
 
           <%= render "devise/shared/links" %>
-          </form>
         </div>
       </div>
     </div>

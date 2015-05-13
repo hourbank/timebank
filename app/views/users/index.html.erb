@@ -21,11 +21,18 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <% @all_users.each do |u| %>
                                         <tr class="odd gradeX">
-                                            <td><a href="/users/<%= u.id %>"><strong><%= u.first_name %></strong></a></td>
+                                            <td>
+                                            <%= link_to user_path(u) do %>
+                                                <strong><%= u.first_name %></strong>
+                                            <% end %>
+                                                <!-- <a href="/users/<%= u.id %>"><strong><%= u.first_name %></strong></a> -->
+                                            </td>
                                             <td><%= u.city %></td>
                                             <td><%=u.services_offered %></td>
                                         </tr>
+                                        <% end %>
                                     </tbody>
                                 </table>
                             </div>
@@ -35,7 +42,7 @@
             </div>
  <!-- /.table-responsive -->
 
-<% @all_users.each do |u| %>
+
   <div>
      
     <br>
@@ -43,4 +50,4 @@
    <br><br>
   </div>
 
-<% end %>
+
