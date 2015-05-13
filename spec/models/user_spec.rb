@@ -12,18 +12,4 @@ RSpec.describe User, type: :model do
     	it { is_expected.to respond_to :encrypted_password }
     	it { is_expected.to respond_to :time_balance }
 	end
-=begin
-	TO FINISH AT A LATER DATE???
-  describe 'Database' do
-  	it { is_expected.to have_db_column :first_name }
-  	it { is_expected.to have_db_column :last_name }
-    it { is_expected.to have_db_column :email }
-  end
-
-  describe 'Validations' do
-  	it { is_expected.to validate_presence_of :email }
-  	it { is_expected.to validate_presence_of :phone }
-  end
-=end
-
 end
