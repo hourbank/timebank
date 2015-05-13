@@ -81,6 +81,8 @@ class Exchange < ActiveRecord::Base
     self.provider.time_balance += self.final_hours
   end
 
+  
+
   def your_exchange?
     if !(current_user == self.recipient || current_user == self.provider)
       redirect_to users_account_path
