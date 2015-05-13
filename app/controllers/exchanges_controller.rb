@@ -23,7 +23,7 @@ class ExchangesController < ApplicationController
 			})
 
 		#Send SMS to Recipient (i.e., person getting service)
-		message = "Someone is interested in your Service Request. Please log in to your Timebank account for more info. \n-The TimeBank Team"
+		message = "Someone is interested in your Service Request. Please log in to your Epoch account for more info. \n-The TimeBank Team"
 	
 		send_sms_to(which_service_request.recipient, message)
 
