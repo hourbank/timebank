@@ -57,7 +57,15 @@ Confirmed on: <%= @exchange.confirmed_date %>
 <% if @exchange.stage[:stage_number] == 2 %>
 	<% if @exchange.provider == current_user %>
 		<h2>
+
+		<!-- How many hours did this service actually take?
+		NEEDS TEXT ENTRY FIELD FOR PERSON TO ENTER NUMBER
+		CONFIRM BUTTON IS SUBMIT 
+		Variable name should be "entered_hours"
+		BUTTON HAS TO BE A -->
 		<%= link_to 'Confirm that you have done this', deliver_exchange_path(@exchange) %>
+
+
 		</h2>
 	<% end %>
 <% end %>
