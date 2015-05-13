@@ -91,32 +91,34 @@ before_action :your_exchange?, only: [:show, :accept_exchange, :confirm_exchange
   	def confirm_exchange
 
 		@exchange = Exchange.find(params[:id])
-		
-		# Update Exchange status in database
-	  	@exchange.update(confirmed: true, confirmed_date: Date.today)
 
-	  	# Transfer hours (# is final_hours) from RECIPIENT to PROVIDER
-	  	@exchange.transfer_hours
+		if @exchange.recipient.time_balance > @exchange.final_hours
+			# Recipient has enough hours, so proceed with "payment"
 
-	  	# Send SMS message to Provider
-		message = @exchange.recipient.first_name+" has confirmed your exchange.  Thank you for exchanging help with Epoch! "+@exchange.final_hours.to_s+" hour(s) have been added to your balance. \n-The Epoch Team"
-		
-		send_sms_to(@exchange.provider, message)
+			# Update Exchange status in database
+		  	@exchange.update(confirmed: true, confirmed_date: Date.today)
 
-		# Send SMS message to Recipient
-		message = "Thank you for confirming your exchange with "+@exchange.provider+". "+@exchange.final_hours.to_s+" hour(s) have been deducted from your account. \n-The Epoch Team"
-		
-		send_sms_to(@exchange.recipient, message)
+		  	# Transfer hours (amount is final_hours) from RECIPIENT to PROVIDER
+		  	@exchange.transfer_hours
 
+		  	# Send SMS message to Provider
+			message = @exchange.recipient.first_name+" has confirmed your exchange.  Thank you for exchanging help with Epoch! "+@exchange.final_hours.to_s+" hour(s) have been added to your balance. \n-The Epoch Team"
+			
+			send_sms_to(@exchange.provider, message)
 
+			# Send SMS message to Recipient
+			message = "Thank you for confirming your exchange with "+@exchange.provider+". "+@exchange.final_hours.to_s+" hour(s) have been deducted from your account. \n-The Epoch Team"
+			
+			send_sms_to(@exchange.recipient, message)
 
-
-
-
-	  	# Redirect to same page, but with updated status (no Ajax yet...)
-	  	redirect_to exchange_path(@exchange)
-
-  	end
+		  	# Redirect to same page, but with updated status (no Ajax yet...)
+		  	redirect_to exchange_path(@exchange)
+   		 else
+    		# Get here if balance is not enough for this exchange at this time.  Warn user
+	  		flash.now[:alert] = 'You do not currently have enough hours in your account to pay for this exchange.  Please provide some services to earn more hours, then come back to confirm this exchange!'
+	  	end
+    end
+ 
 
 	private
 
