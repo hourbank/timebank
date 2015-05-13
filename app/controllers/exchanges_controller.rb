@@ -1,5 +1,8 @@
 class ExchangesController < ApplicationController
 
+before_action :logged_in?
+before_action :your_exchange?, only: [:show, :accept_exchange, :confirm_exchange, :deliver_exchange]
+
 	def proposal_by_provider
 		which_sr = params[:id]
 		#Create new record in Exchange
@@ -49,7 +52,8 @@ class ExchangesController < ApplicationController
 	  		@exchange.update(accepted: true, accepted_date: Date.today)
 
 	  		# Send SMS message to counter-party
-			message = "Someone accepted your proposal for an exchange! Please log in to your Timebank account for more info. \n-The TimeBank Team"
+	  		accepter_name = @exchange.accepting_party.first_name
+			message = accepter_name+" accepted your proposal for an exchange! Please log in to your Epoch account for more info. \n-The Epoch Team"
 		
 			send_sms_to(@exchange.proposing_party, message)
 
@@ -63,4 +67,69 @@ class ExchangesController < ApplicationController
 
   	end
 
+  	def deliver_exchange
+
+		@exchange = Exchange.find(params[:id])
+		new_hours = params[:exchange][:final_hours]
+		
+		# STILL NEED to ask PROVIDER what is # of final hours
+		# FOR NOW JUST PASSING OVER ESTIMATED HOURS INTO FINAL HOURS!!!!
+
+		# Update Exchange status in database
+	  	@exchange.update(final_hours: new_hours, delivered: true, delivered_date: Date.today)
+
+	  	# Send SMS message to counter-party
+		message = @exchange.provider.first_name+" has provided you with help. Please finalize the exchange by logging in to your Epoch account. \n-The Epoch Team"
+		
+		send_sms_to(@exchange.recipient, message)
+
+	  	# Redirect to same page, but with updated status (no Ajax yet...)
+	  	redirect_to exchange_path(@exchange)
+
+  	end
+
+  	def confirm_exchange
+
+		@exchange = Exchange.find(params[:id])
+		
+		# Update Exchange status in database
+	  	@exchange.update(confirmed: true, confirmed_date: Date.today)
+
+	  	# Transfer hours (# is final_hours) from RECIPIENT to PROVIDER
+	  	@exchange.transfer_hours
+
+	  	# Send SMS message to Provider
+		message = @exchange.recipient.first_name+" has confirmed your exchange.  Thank you for exchanging help with Epoch! "+@exchange.final_hours.to_s+" hour(s) have been added to your balance. \n-The Epoch Team"
+		
+		send_sms_to(@exchange.provider, message)
+
+		# Send SMS message to Recipient
+		message = "Thank you for confirming your exchange with "+@exchange.provider+". "+@exchange.final_hours.to_s+" hour(s) have been deducted from your account. \n-The Epoch Team"
+		
+		send_sms_to(@exchange.recipient, message)
+
+
+
+
+
+
+	  	# Redirect to same page, but with updated status (no Ajax yet...)
+	  	redirect_to exchange_path(@exchange)
+
+  	end
+
+	private
+
+	def logged_in?
+		if !user_signed_in?
+			redirect_to "/"
+		end
+	end
+
+	def your_exchange?
+		@exchange = Exchange.find(params[:id])
+	    if !(current_user == @exchange.recipient || current_user == @exchange.provider)
+	      redirect_to users_account_path
+	    end
+  	end
 end

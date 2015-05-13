@@ -57,7 +57,6 @@ class Exchange < ActiveRecord::Base
 
   end
 
-
   def sufficient_balance?
   	# Check to see if the RECIPIENT of the proposed Exchange has enough hours in his/her account to handle this exchange
   	# "Enough" means a) time_balance - estimated_hours >= -2 and b) time_balance > 0
@@ -69,6 +68,23 @@ class Exchange < ActiveRecord::Base
   	end
 
   	return approved
+  end
+
+  def transfer_hours
+    # Transfer hours from RECIPIENT of exchange to PROVIDER of exchange
+    # The number of hours is the "final_hours" column of Exchange table
+
+    # Remove hours from RECIPIENT balance
+    self.recipient.time_balance -= self.final_hours
+
+    # Add hours to PROVIDER balance
+    self.provider.time_balance += self.final_hours
+  end
+
+  def your_exchange?
+    if !(current_user == self.recipient || current_user == self.provider)
+      redirect_to users_account_path
+    end
   end
 
 end
