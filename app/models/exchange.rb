@@ -70,7 +70,6 @@ class Exchange < ActiveRecord::Base
   	return approved
   end
 
- private
   def transfer_hours
     # Transfer hours from RECIPIENT of exchange to PROVIDER of exchange
     # The number of hours is the "final_hours" column of Exchange table
@@ -80,6 +79,12 @@ class Exchange < ActiveRecord::Base
 
     # Add hours to PROVIDER balance
     self.provider.time_balance += self.final_hours
+  end
+
+  def your_exchange?
+    if !(current_user == self.recipient || current_user == self.provider)
+      redirect_to users_account_path
+    end
   end
 
 end

@@ -63,10 +63,21 @@ Confirmed on: <%= @exchange.confirmed_date %>
 		CONFIRM BUTTON IS SUBMIT 
 		Variable name should be "entered_hours"
 		BUTTON HAS TO BE A -->
-		<%= link_to 'Confirm that you have done this', deliver_exchange_path(@exchange) %>
 
 
 		</h2>
+
+
+		<%= form_for(@exchange, url: deliver_exchange_path(@exchange), html: {method: "get"}) do |f| %>
+
+		<%= f.text_field :final_hours, placeholder: "How long did it take?" %>
+		<%= f.submit "Confirm exchange" %>
+
+		<% end %>
+
+
+		<%= link_to 'Confirm that you have done this', deliver_exchange_path(@exchange) %>
+
 	<% end %>
 <% end %>
 

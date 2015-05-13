@@ -1,5 +1,8 @@
 class ExchangesController < ApplicationController
 
+before_action :logged_in?
+before_action :your_exchange?, only: [:show, :accept_exchange, :confirm_exchange, :deliver_exchange]
+
 	def proposal_by_provider
 		which_sr = params[:id]
 		#Create new record in Exchange
@@ -67,12 +70,13 @@ class ExchangesController < ApplicationController
   	def deliver_exchange
 
 		@exchange = Exchange.find(params[:id])
+		new_hours = params[:exchange][:final_hours]
 		
 		# STILL NEED to ask PROVIDER what is # of final hours
 		# FOR NOW JUST PASSING OVER ESTIMATED HOURS INTO FINAL HOURS!!!!
 
 		# Update Exchange status in database
-	  	@exchange.update(final_hours: @exchange.estimated_hours, delivered: true, delivered_date: Date.today)
+	  	@exchange.update(final_hours: new_hours, delivered: true, delivered_date: Date.today)
 
 	  	# Send SMS message to counter-party
 		message = @exchange.provider.first_name+" has provided you with help. Please finalize the exchange by logging in to your Epoch account. \n-The Epoch Team"
@@ -114,7 +118,18 @@ class ExchangesController < ApplicationController
 
   	end
 
+	private
 
+	def logged_in?
+		if !user_signed_in?
+			redirect_to "/"
+		end
+	end
 
-
+	def your_exchange?
+		@exchange = Exchange.find(params[:id])
+	    if !(current_user == @exchange.recipient || current_user == @exchange.provider)
+	      redirect_to users_account_path
+	    end
+  	end
 end
