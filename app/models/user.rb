@@ -19,3 +19,4 @@ class User < ActiveRecord::Base
   # Allow access to all these attributes
   #attr_reader :first_name, :last_name, :email, :phone, :services_offered, :city, :zipcode, :hours_balance
 end
+

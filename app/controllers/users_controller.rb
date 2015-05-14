@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+before_action :logged_in?
+
 	def index
 		@all_users = User.all
 	end
@@ -14,5 +16,14 @@ class UsersController < ApplicationController
 		@user = current_user
 		@requests = ServiceRequest.all
 		@exchanges= Exchange.all
+	end
+
+	private
+
+	def logged_in?
+		if !user_signed_in?
+			flash[:error] = "Please sign in first!"
+			redirect_to "/users/sign_in"
+		end
 	end
 end
