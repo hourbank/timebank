@@ -42,6 +42,12 @@ Confirmed on: <%= @exchange.confirmed_date %>
 <!-- ACCEPT a proposed exchange -->
 <!-- Only allow the counter-party to the Proposed Exchange to accept (i.e., the person who did not propose it) -->
 
+<!-- flash error if insufficient balance -->
+<% if flash[:error] %>
+  <br><br>
+  <div class="error"><%= flash[:error] %></div>
+<% end %>
+
 <% if @exchange.stage[:stage_number] == 1 %>
 	<% if @exchange.accepting_party == current_user %>
 		<h2>

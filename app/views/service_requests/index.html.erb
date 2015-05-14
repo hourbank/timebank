@@ -33,8 +33,10 @@
                         <td><%= service_request.timing %></td>       
                         <td><%= service_request.recipient.first_name %></td>
                         <td><%= link_to 'More info', service_request %></td>
-                        <td><%= link_to 'Edit', edit_service_request_path(service_request) %></td>
-                        <td><%= link_to 'Remove', service_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                        <% if service_request.recipient == @current_user %>
+                          <td><%= link_to 'Edit', edit_service_request_path(service_request) %></td>
+                          <td><%= link_to 'Remove', service_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                          <% end %>
                         </tr>
                     <% end %>
                     </tbody>
