@@ -62,7 +62,7 @@ before_action :your_exchange?, only: [:show, :accept_exchange, :confirm_exchange
 
 	  	else 
 	  		# Get here if balance is not enough for this exchange at this time.  Warn user
-	  		flash.now[:alert] = 'You do not currently have enough hours in your account for this exchange.  Please provide some services to earn more hours, then come back to accept this exchange!'
+	  		flash.now[:alert] = "You do not currently have enough hours in your account for this exchange.  Please provide some services to earn more hours, then come back to accept this exchange!"
 	  	end
 
   	end

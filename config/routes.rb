@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
 
   # Root route -- this is temporary until we have better starting point
-  root to: "site#index" # change this once we have some better page to start
+  root to: "site#index"
   
   # User model & route generated via Devise gem
-  devise_for :users
+  devise_for :users, :controllers => { registrations: 'registrations' }
 
   # ServiceRequest model has standard resources routes
   resources :service_requests
@@ -25,9 +25,13 @@ Rails.application.routes.draw do
   # Also need post/get routes for edit view of users#account
 
   get "/exchanges/:id/create", to: "exchanges#proposal_by_provider", as: 'create_exchange'
+
   get "/exchanges/:id", to: "exchanges#show", as: 'exchange'
+
   get "/exchanges/:id/accept", to: "exchanges#accept_exchange", as: 'accept_exchange'
+
   get "/exchanges/:id/deliver", to: "exchanges#deliver_exchange", as: 'deliver_exchange'
+  
   get "/exchanges/:id/confirm", to: "exchanges#confirm_exchange", as: 'confirm_exchange'
 
 end
