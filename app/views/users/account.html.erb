@@ -1,9 +1,16 @@
-<br><br><br>
 
-<h1>Welcome, <%=@user.first_name %>!</h1>
-<br>
 
-<h3>You currently have <%= @user.time_balance %> hours in your account!</h3>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="jumbotron">
+      <h1>Welcome, <%=@user.first_name %>!</h1>
+      <h3>You currently have <%= @user.time_balance %> hours in your account!</h3>
+        <p><a class="btn btn-primary btn-lg" role="button">Learn more</a></p>
+    </div>
+  </div>
+<!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
 <br>
 
 <div>
@@ -29,7 +36,7 @@
         <a href="/service_requests/<%= r.id %>"><strong><%= r.title %></strong></a>
         <%= r.created_at %><br>
         <%= r.description %><br>
-        Estimate hours: <%= r.estimated_hours %><br>
+        Estimated hours: <%= r.estimated_hours %><br>
         Location: <%= r.location %><br>
         Timing: <%= r.timing %><br>   
         <%= link_to "Edit", edit_service_request_path(r) %> | <%= link_to "Destroy", r, method: :delete, data: { confirm: "Are you sure?" } %>   
