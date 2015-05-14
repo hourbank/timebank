@@ -47,7 +47,8 @@ h6 {
     padding-bottom: 50px;
     text-align: center;
     color: #f8f8f8;
-    background: url("/assets/time.jpeg") no-repeat center center;
+    /*background: url("/assets/time.jpeg") no-repeat center center;*/
+    background-color: #ed6a5a;
     background-size: cover;
       overflow: hidden;
 }
@@ -271,6 +272,8 @@ h4 {
 .dropdown:hover .dropdown-menu {
         display: block;
 }
+
+
 
 
 
