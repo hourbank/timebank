@@ -34,12 +34,43 @@ before_action :your_exchange?, only: [:show, :accept_exchange, :confirm_exchange
 		redirect_to exchange_path(@proposed_exchange)
 	end
 
+	def proposal_by_recipient
+		which_provider_id = params[:id]
+
+		provider = User.find(which_provider_id)
+
+		#Create new record in Exchange
+
+		@proposed_exchange = Exchange.create({
+			provided_by_id: which_provider_id,
+			received_by_id: current_user.id,
+			# For the moment, just creating "naked" exchange proposal without any details. *** Add entry form later. ***
+			# estimated_hours: NEED_INPUT_FORM,
+			# description: NEED_INPUT_FORM,
+			# title: NEED_INPUT_FORM,
+			# location: NEED_INPUT_FORM,
+			proposed: true,
+			proposed_date: Date.today,
+			accepted: false,
+			delivered: false,
+			confirmed: false,
+			service_requested_id: nil
+			})
+
+		#Send SMS to Provider
+		message = "Someone is interested in your services on Epoch Bank. Please log in to your Epoch account for more info. \n-The Epoch Bank Team"
+	
+		send_sms_to(provider, message)
+
+		#Redirect to Exchange show page
+		redirect_to exchange_path(@proposed_exchange)
+	end
+
 	def show
 		@exchange = Exchange.find(params[:id])
 	end
 
 	def accept_exchange
-
 		@exchange = Exchange.find(params[:id])
 		
 		#CHECK WHAT @EXCHANGE is and WHETHER it has service_requested_id

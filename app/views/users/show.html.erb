@@ -7,7 +7,8 @@
 <p>What I can do for you:<br>
 <%= @user.services_offered %></p>
 
-<p>[Button to request help]</p>
+<p><%= link_to 'Please help me!', create_exchange_recipient_path(@user) %>
+</p>
 
 <br>
 
