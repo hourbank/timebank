@@ -9,6 +9,9 @@ class User < ActiveRecord::Base
   #has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
   #validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
+  # require all fields be filled out when registering
+  validates_presence_of :first_name, :last_name, :phone, :services_offered, :city, :zipcode, :time_balance
+
   # For associations with Exchange (2 separate 1:many relationships)
   has_many :exchanges_provided, class_name: "Exchange", foreign_key: "provided_by_id"
   has_many :exchanges_received, class_name: "Exchange", foreign_key: "received_by_id"
