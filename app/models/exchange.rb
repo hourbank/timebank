@@ -67,7 +67,7 @@ class Exchange < ActiveRecord::Base
   	# "Enough" means a) time_balance - estimated_hours >= -2 and b) time_balance > 0
   	# In other words, you can go into debt by up to 2 hours, but only if you are not in debt yet
 
-  	if self.recipient.time_balance - self.estimated_hours >= -2 && self.recipient.time_balance > 0
+  	if self.recipient.time_balance - self.estimated_hours >= -2 && self.recipient.time_balance >= 0
   		approved = true
   	else approved = false
   	end
