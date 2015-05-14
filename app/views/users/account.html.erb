@@ -50,21 +50,33 @@
   <h4>Your Exchanges</h4>
   <p>
     <% @exchanges.each do |e| %>
-      <%= e.created_at %>
-      <a href="/exchanges/<%= e.id %>"><%= e.title %></a>
       <% if e.provided_by_id == @user.id %>
-        Recipient: <%= e.recipient.first_name %>
-      <% elsif e.received_by_id == @user.id %>
-        Provider: <%= e.provider.first_name %>
+        <%= e.created_at %>
+        <a href="/exchanges/<%= e.id %>"><%= e.title %></a><br>
+        Recipient: <%= e.recipient.first_name %><br>
+        <% if e.confirmed == true %>
+          Status: Confirmed
+        <% elsif e.delivered == true %>
+          Status: Delivered, pending confirmation
+        <% elsif e.accepted == true %>
+          Status: Accepted, pending delivery
+        <% else %>
+          Status: Proposed, pending acceptance  
+        <% end %><br><br>
       <% end %>
-      <% if e.confirmed == true %>
-        Status: Confirmed
-      <% elsif e.delivered == true %>
-        Status: Delivered, pending confirmation
-      <% elsif e.accepted == true %>
-        Status: Accepted, pending delivery
-      <% else %>
-        Status: Proposed, pending acceptance  
+      <% if e.received_by_id == @user.id %>
+        <%= e.created_at %>
+        <a href="/exchanges/<%= e.id %>"><%= e.title %></a><br>
+        Provider: <%= e.provider.first_name %>
+        <% if e.confirmed == true %>
+          Status: Confirmed
+        <% elsif e.delivered == true %>
+          Status: Delivered, pending confirmation
+        <% elsif e.accepted == true %>
+          Status: Accepted, pending delivery
+        <% else %>
+          Status: Proposed, pending acceptance  
+        <% end %><br><br>
       <% end %>
     <% end %>
   </p>

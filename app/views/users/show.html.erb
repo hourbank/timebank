@@ -23,3 +23,8 @@
   </div>
 <% end %>
 
+<br><br>
+<% if @user == @current_user %>
+  <%= link_to "Edit Profile", edit_registration_path(@user) %>
+<% end %>
+

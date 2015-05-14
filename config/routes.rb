@@ -27,5 +27,7 @@ Rails.application.routes.draw do
   get "/exchanges/:id/create", to: "exchanges#proposal_by_provider", as: 'create_exchange'
   get "/exchanges/:id", to: "exchanges#show", as: 'exchange'
   get "/exchanges/:id/accept", to: "exchanges#accept_exchange", as: 'accept_exchange'
-  
+  get "/exchanges/:id/deliver", to: "exchanges#deliver_exchange", as: 'deliver_exchange'
+  get "/exchanges/:id/confirm", to: "exchanges#confirm_exchange", as: 'confirm_exchange'
+
 end

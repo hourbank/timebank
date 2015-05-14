@@ -44,9 +44,57 @@ Confirmed on: <%= @exchange.confirmed_date %>
 
 <% if @exchange.stage[:stage_number] == 1 %>
 	<% if @exchange.accepting_party == current_user %>
-<h2>
-	<%= link_to 'Accept this proposal', accept_exchange_path(@exchange) %>
-</h2>
+		<h2>
+		<%= link_to 'Accept this proposal', accept_exchange_path(@exchange) %>
+		</h2>
 	<% end %>
 <% end %>
+
+<!-- DELIVER an accepted exchange -->
+<!-- Only allow the PROVIDER of the Accepted Exchange to deliver -->
+<!-- NEED TO ADD FORM FOR FINAL HOURS! -->
+
+<% if @exchange.stage[:stage_number] == 2 %>
+	<% if @exchange.provider == current_user %>
+		<h2>
+
+		<!-- How many hours did this service actually take?
+		NEEDS TEXT ENTRY FIELD FOR PERSON TO ENTER NUMBER
+		CONFIRM BUTTON IS SUBMIT 
+		Variable name should be "entered_hours"
+		BUTTON HAS TO BE A -->
+
+
+		</h2>
+
+
+		<%= form_for(@exchange, url: deliver_exchange_path(@exchange), html: {method: "get"}) do |f| %>
+
+		<%= f.text_field :final_hours, placeholder: "How long did it take?" %>
+		<%= f.submit "Confirm exchange" %>
+
+		<% end %>
+
+
+		<%= link_to 'Confirm that you have done this', deliver_exchange_path(@exchange) %>
+
+	<% end %>
+<% end %>
+
+<!-- CONFIRM a delivered exchange -->
+<!-- Only allow the RECIPIENT of the Delivered Exchange to confirm -->
+<!-- NEED TO ADD FORM FOR FINAL HOURS! -->
+
+<% if @exchange.stage[:stage_number] == 3 %>
+	<% if @exchange.recipient == current_user %>
+		<h2>
+		<%= link_to 'Confirm that you received this', confirm_exchange_path(@exchange) %>
+		</h2>
+	<% end %>
+<% end %>
+
+
+
+
+
 
