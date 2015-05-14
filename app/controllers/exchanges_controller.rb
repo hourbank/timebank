@@ -42,7 +42,6 @@ before_action :your_exchange?, only: [:show, :accept_exchange, :confirm_exchange
 
 		@exchange = Exchange.find(params[:id])
 		
-		#Byebug
 		#CHECK WHAT @EXCHANGE is and WHETHER it has service_requested_id
 
 	  	# Check that there are sufficient hours in recipient's balance
@@ -63,6 +62,9 @@ before_action :your_exchange?, only: [:show, :accept_exchange, :confirm_exchange
 	  	else 
 	  		# Get here if balance is not enough for this exchange at this time.  Warn user
 	  		flash.now[:alert] = 'You do not currently have enough hours in your account for this exchange.  Please provide some services to earn more hours, then come back to accept this exchange!'
+
+	  			# Redirect to same page, but with updated status (no Ajax yet...)
+	  		redirect_to exchange_path(@exchange)
 	  	end
 
   	end
@@ -116,6 +118,7 @@ before_action :your_exchange?, only: [:show, :accept_exchange, :confirm_exchange
    		 else
     		# Get here if balance is not enough for this exchange at this time.  Warn user
 	  		flash.now[:alert] = 'You do not currently have enough hours in your account to pay for this exchange.  Please provide some services to earn more hours, then come back to confirm this exchange!'
+	  	  	redirect_to exchange_path(@exchange)
 	  	end
     end
 
