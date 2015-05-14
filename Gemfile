@@ -31,6 +31,7 @@ gem 'pundit'
 # Twilio for SMS texting from application
 gem 'twilio-ruby', '~> 4.1.0'
 
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

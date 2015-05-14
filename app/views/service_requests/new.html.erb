@@ -1,6 +1,14 @@
 <!-- Not necessary since we're using Ajax to create new service request directly on index page? -->
-<h1>New Service Request</h1>
 
-<%= render 'form' %>
 
-<%= link_to 'Back', service_requests_path %>
+<div class="container" style="padding-bottom:50px">
+  <div class="col-md-6 col-md-offset-4">
+	<h2>Start a new request:</h2>
+  		<%= render 'form' %>
+
+		<%= link_to 'Back', service_requests_path %>
+	</div>
+</div>
+
+
+

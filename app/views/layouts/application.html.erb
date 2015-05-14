@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Timebank</title>
+  <title>Epoch</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -13,8 +13,13 @@
     <link href="stylesheets/application.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="stylesheets/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -28,40 +33,55 @@
 </header>
 <body>
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
-        <div class="container topnav">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand topnav" href="#">OurBank</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <%= link_to "About", about_path %>
-                    </li>
-                    <li>
-                        <%= link_to "Contact", contact_path %>
-                    </li>
-                    <li>
-                        <a href="/users/sign_up">Log In/Sign Up</a>
-                    </li>
+
+<nav role="navigation" class="navbar navbar-default">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+        <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand topnav" href="/">Epoch</a>
+    </div>
+    <!-- Collection of nav links, forms, and other content for toggling -->
+    <div id="navbarCollapse" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+            <li class="active"> <%= link_to "About", about_path %></li>
+            <li><%= link_to "Contact", contact_path %></li>
+            <li class="dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#">Get Help <b class="caret"></b></a>
+                <ul role="menu" class="dropdown-menu">
+                    <li><%= link_to "Start a request", new_service_request_path %></li>
+                    <li><%= link_to "See all users", users_path %></li>
                 </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
+            </li>
+            <li class="dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#">Give Help <b class="caret"></b></a>
+                <ul role="menu" class="dropdown-menu">
+                    <li><%= link_to "Browse requests", service_requests_path %></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#">My Account <b class="caret"></b></a>
+                <ul role="menu" class="dropdown-menu">
+                    <li><%= link_to "My dashboard", users_account_path %></li>
+                    <li><% if user_signed_in? %>
+                        <% link_to "My profile", user_path(current_user) %>
+                        <% end %> </li>
+                    <li class="divider"></li>
+                    <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><%= link_to "Log In", new_user_session_path %></li>
+            <li><%= link_to "Sign Up", new_user_registration_path %></li>
+        </ul>
+    </div>
+</nav>
 
-
-   
 
     <%= yield %>
 
@@ -73,16 +93,22 @@
                 <div class="col-lg-12">
                     <ul class="list-inline">
                        <li>
-                        <a href="#about">About</a>
+                        <%= link_to "About", about_path %>
                     </li>
+                    <li class="footer-menu-divider">⋅</li>
                     <li>
-                        <a href="#services">Contact</a>
+                         <%= link_to "Contact", contact_path %>
                     </li>
+                    <li class="footer-menu-divider">⋅</li>
                     <li>
-                        <a href="/users/sign_up">Log In/Sign Up</a>
+                        <%= link_to "Sign Up",new_user_registration_path %>
+                    </li>
+                    <li class="footer-menu-divider">⋅</li>
+                    <li>
+                        <%= link_to "Log In", new_user_session_path %>
                     </li>
                     </ul>
-                    <p class="copyright text-muted small">Copyright &copy; GA WDI Team 2 2015. All Rights Reserved.</p>
+                    <p class="copyright text-muted small">Copyright &copy; General Assembly WDI Team 2, 2015. All Rights Reserved.</p>
                 </div>
             </div>
         </div>
@@ -90,7 +116,4 @@
     <!-- Adding below code for Ajax: -->
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 </body>
-<footer>
-<%= render "shared/temporaryMenu" %>
-</footer>
 </html>
