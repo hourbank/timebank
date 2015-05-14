@@ -107,7 +107,7 @@ before_action :your_exchange?, only: [:show, :accept_exchange, :confirm_exchange
 			send_sms_to(@exchange.provider, message)
 
 			# Send SMS message to Recipient
-			message = "Thank you for confirming your exchange with "+@exchange.provider+". "+@exchange.final_hours.to_s+" hour(s) have been deducted from your account. \n-The Epoch Team"
+			message = "Thank you for confirming your exchange with "+@exchange.provider.first_name+". "+@exchange.final_hours.to_s+" hour(s) have been deducted from your account. \n-The Epoch Team"
 			
 			send_sms_to(@exchange.recipient, message)
 
