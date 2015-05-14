@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root to: "site#index"
   
   # User model & route generated via Devise gem
-  devise_for :users, :controllers => { registrations: 'registrations' }
+  devise_for :users , :controllers => { registrations: 'registrations' }
 
   # ServiceRequest model has standard resources routes
   resources :service_requests
