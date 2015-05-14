@@ -13,16 +13,16 @@ class Exchange < ActiveRecord::Base
 	#byebug
 
 		if self.confirmed
-			@current_stage = {"stage_name" => "Confirmed","stage_number" => 4}
+			@current_stage = {stage_name: "Confirmed", stage_number: 4}
 		elsif self.delivered
-			@current_stage = {"stage_name" => "Delivered","stage_number" => 3}
+			@current_stage = {stage_name: "Delivered", stage_number: 3}
 		elsif self.accepted
-			@current_stage = {"stage_name" => "Accepted","stage_number" => 2}
+			@current_stage = {stage_name: "Accepted", stage_number: 2}
 		elsif self.proposed
-			@current_stage = {"stage_name" => "Proposed","stage_number" => 1}
+			@current_stage = {stage_name: "Proposed", stage_number: 1}
 		else 
 			#Hopefully the following line will never be used
-			@current_stage = {"stage_name" => "Error with Exchange","stage_number" => 0}
+			@current_stage = {stage_name: "Error with Exchange model stage method", stage_number: 0}
 		end
 
 		return @current_stage
