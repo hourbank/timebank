@@ -57,12 +57,16 @@
               <%= f.text_field :zipcode, placeholder: "Zipcode" %>
             </div>
 
+            <div>
+              <i>The Epoch community is founded upon the premise of its members working together. As such, it is imperitive that every member interact with the community honestly, both on and offline. By signing up, you agree to these terms.</i>
+            </div><br>
+
             <div class="actions">
               <%= f.submit "Sign up" %>
             </div>
           <% end %>
 
-          <%= render "devise/shared/links" %>
+          Already have an account? <%= render "devise/shared/links" %>
         </div>
       </div>
     </div>

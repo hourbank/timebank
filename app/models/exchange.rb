@@ -2,9 +2,14 @@ class Exchange < ActiveRecord::Base
   belongs_to :provider, class_name: "User", foreign_key: "provided_by_id"
   belongs_to :recipient, class_name: "User", foreign_key: "received_by_id"
 
-  # Allow access to all these attributes
-  # attr_reader :estimated_hours, :final_hours, :description, :proposed, :proposed_date, :accepted, :accepted_date, :delivered, :delivered_date, :confirmed, :confirmed_date, :service_request_id
-  #if we add these fields to Exchange table-->  :location, :timing,:title
+  def self.total_hours
+    memo = 0
+    self.all.each do |each_exchange|
+      memo = memo + each_exchange.final_hours
+    end
+
+    return memo
+  end
 
   def stage
 	# This method takes in an exchange object and returns a hash with two key:values
@@ -62,7 +67,7 @@ class Exchange < ActiveRecord::Base
   	# "Enough" means a) time_balance - estimated_hours >= -2 and b) time_balance > 0
   	# In other words, you can go into debt by up to 2 hours, but only if you are not in debt yet
 
-  	if self.recipient.time_balance - self.estimated_hours >= -2 && self.recipient.time_balance > 0
+  	if self.recipient.time_balance - self.estimated_hours >= -2 && self.recipient.time_balance >= 0
   		approved = true
   	else approved = false
   	end
@@ -74,25 +79,45 @@ class Exchange < ActiveRecord::Base
     # Transfer hours from RECIPIENT of exchange to PROVIDER of exchange
     # The number of hours is the "final_hours" column of Exchange table
 
-    # Confirm that RECIPIENT has sufficient hours in time_balance
-    if self.recipient.time_balance > self.final_hours
-      ActiveRecord::Base.transaction do
-        # Remove hours from RECIPIENT balance
-        new_recipient_balance = self.recipient.time_balance - self.final_hours
-        # Put this new value into database for recipient
-        who_from = User.find(self.recipient.id)
-        who_from.update(time_balance: new_recipient_balance)
+    # For now, allowing RECIPIENT to pay for Exchange, regardless of time_balance.  Idea is that it is better to pay the PROVIDER and let RECIPIENT go into debt.  Limitation on bad user behavior is that RECIPIENT cannot Accept any further proposals if time_balance is negative (or exchange would push him/her lower than -2)
 
-        # Add hours to PROVIDER balance
-        new_provider_balance = self.provider.time_balance + self.final_hours
-        # Put this new value into database for provider
-        who_to = User.find(self.provider.id)
-        who_to.update(time_balance: new_provider_balance)
-      end
-    else
-      #Should never get here, because should test in controller
-      alert "Not enough hours for this transfer"
+    ActiveRecord::Base.transaction do
+      # Remove hours from RECIPIENT balance
+      new_recipient_balance = self.recipient.time_balance - self.final_hours
+      # Put this new value into database for recipient
+      who_from = User.find(self.recipient.id)
+      who_from.update(time_balance: new_recipient_balance)
+
+      # Add hours to PROVIDER balance
+      new_provider_balance = self.provider.time_balance + self.final_hours
+      # Put this new value into database for provider
+      who_to = User.find(self.provider.id)
+      who_to.update(time_balance: new_provider_balance)
     end
+
+    # IF WE DECIDE IN THE FUTURE TO IMPLEMENT SOME TYPE OF BALANCE CHECKING, WE WILL USE THE CODE BELOW.  DO NOT DELETE IT.
+
+    # # Confirm that RECIPIENT has sufficient hours in time_balance
+    # if self.recipient.time_balance > self.final_hours
+    #   ActiveRecord::Base.transaction do
+    #     # Remove hours from RECIPIENT balance
+    #     new_recipient_balance = self.recipient.time_balance - self.final_hours
+    #     # Put this new value into database for recipient
+    #     who_from = User.find(self.recipient.id)
+    #     who_from.update(time_balance: new_recipient_balance)
+
+    #     # Add hours to PROVIDER balance
+    #     new_provider_balance = self.provider.time_balance + self.final_hours
+    #     # Put this new value into database for provider
+    #     who_to = User.find(self.provider.id)
+    #     who_to.update(time_balance: new_provider_balance)
+    #   end
+    # else
+    #   #Should never get here, because should test in controller
+    #   alert "Not enough hours for this transfer"
+    # end
+  
+    # This 'end' is end of transfer_hours method
   end
 
   def your_exchange?

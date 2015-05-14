@@ -95,7 +95,9 @@ before_action :your_exchange?, only: [:show, :accept_exchange, :confirm_exchange
 
 		@exchange = Exchange.find(params[:id])
 
-		if @exchange.recipient.time_balance >= @exchange.final_hours
+		# Currently allowing Recipient to proceed with confirmation regardless of Recipient time_balance -- idea is that it is better to pay the Provider and let the Recipient go into "debt."  If Recipient balance is negative, Recipient cannot Accept further Exchanges
+
+		#if @exchange.recipient.time_balance >= @exchange.final_hours
 			# Recipient has enough hours, so proceed with "payment"
 		  	
 		  # Transfer hours (amount is final_hours) from RECIPIENT to PROVIDER
@@ -116,11 +118,12 @@ before_action :your_exchange?, only: [:show, :accept_exchange, :confirm_exchange
 
 		  # Redirect to same page, but with updated status (no Ajax yet...)
 		  redirect_to exchange_path(@exchange)
-   		else
+   		#else
+   		# FOR NOW, NOT USING THIS LOGIC (see above) - Recipient can Confirm and pay Provider regardless of time_balance
     		# Get here if balance is not enough for this exchange at this time.  Warn user
-	  		flash[:error] = 'You do not currently have enough hours in your account to pay for this exchange.  Please provide some services to earn more hours, then come back to confirm this exchange!'
-	    	redirect_to exchange_path(@exchange)
-	  	end
+	  		# flash[:error] = 'You do not currently have enough hours in your account to pay for this exchange.  Please provide some services to earn more hours, then come back to confirm this exchange!'
+	    # 	redirect_to exchange_path(@exchange)
+	  	#end
     end
 
 	private
