@@ -47,8 +47,8 @@ h6 {
     padding-bottom: 50px;
     text-align: center;
     color: #f8f8f8;
-    /*background: url("/assets/time.jpeg") no-repeat center center;*/
-    background-color: #ed6a5a;
+    background: url("/assets/time.jpeg") no-repeat center center;
+    /*background-color: #ed6a5a;*/
     background-size: cover;
       overflow: hidden;
 }
@@ -271,6 +271,25 @@ h4 {
 
 .dropdown:hover .dropdown-menu {
         display: block;
+}
+
+
+.panel-green {
+    border-color: #5cb85c;
+}
+
+.panel-green .panel-heading {
+    border-color: #5cb85c;
+    color: #fff;
+    background-color: #5cb85c;
+}
+
+.panel-green a {
+    color: #fff;
+}
+
+.panel-green a:hover {
+    color: #fff;
 }
 
 
