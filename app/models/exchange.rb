@@ -74,12 +74,22 @@ class Exchange < ActiveRecord::Base
     # Transfer hours from RECIPIENT of exchange to PROVIDER of exchange
     # The number of hours is the "final_hours" column of Exchange table
 
-    # Remove hours from RECIPIENT balance
-    self.recipient.time_balance -= self.final_hours
+    # Confirm that RECIPIENT has sufficient hours in time_balance
+    if self.recipient.time_balance > self.final_hours
+      ActiveRecord::Base.transaction do
+        # Remove hours from RECIPIENT balance
+        self.recipient.time_balance -= self.final_hours
 
-    # Add hours to PROVIDER balance
-    self.provider.time_balance += self.final_hours
+        # Add hours to PROVIDER balance
+        self.provider.time_balance += self.final_hours
+      end
+    else
+      #Should never get here, because should test in controller
+      alert "Not enough hours for this transfer"
+    end
   end
+
+  
 
   def your_exchange?
     if !(current_user == self.recipient || current_user == self.provider)
