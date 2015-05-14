@@ -1,9 +1,9 @@
 <p id="notice"><%= notice %></p>
 
-<p>
+<h2>
   <strong>Title:</strong>
   <%= @service_request.title %>
-</p>
+</h2>
 
 <p>
   <strong>Description:</strong>
@@ -27,15 +27,17 @@
 
 <p>
   <strong>Requested by:</strong>
-  <%= @service_request.requested_by_id %>
+  <%= @service_request.recipient.first_name %>
 </p>
 
 <% if @service_request.requested_by_id == @current_user.id %>
-  <%= link_to 'Edit', edit_service_request_path(@service_request) %> | 
+  <%= link_to 'Edit this request', edit_service_request_path(@service_request) %> | 
 <% end %>
-<%= link_to 'Back', service_requests_path %>
+<%= link_to 'See all service requests', service_requests_path %>
 
 <br><br>
 <h2>
-<%= link_to 'I can help with this!', create_exchange_path(@service_request) %>
+<% if !(@service_request.requested_by_id == @current_user.id) %>
+  <%= link_to 'I can help with this!', create_exchange_path(@service_request) %>
+<% end %>
 </h2>

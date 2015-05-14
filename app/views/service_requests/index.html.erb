@@ -6,7 +6,7 @@
   <div class="col-lg-12">
     <div class="panel panel-default">
         <div class="panel-heading">
-          Service Requests
+          Community requests
         </div>
         <!-- /.panel-heading -->
           <div class="panel-body">
@@ -20,21 +20,21 @@
                         <th>Location</th>
                         <th>Timing</th>
                         <th>Requested by</th>
-                        
                     </tr>
                   </thead>
                     <tbody>
                       <% @service_requests.each do |service_request| %>
                         <tr id='srs'>
+                        <td><h3><%= link_to service_request.title, service_request %></h3></td>
                         <td><%= service_request.title %></td>
                         <td><%= service_request.description %></td>
                         <td><%= service_request.estimated_hours %></td>
                         <td><%= service_request.location %></td>
                         <td><%= service_request.timing %></td>       
                         <td><%= service_request.recipient.first_name %></td>
-                        <td><%= link_to 'Show', service_request %></td>
+                        <td><%= link_to 'More info', service_request %></td>
                         <td><%= link_to 'Edit', edit_service_request_path(service_request) %></td>
-                        <td><%= link_to 'Destroy', service_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                        <td><%= link_to 'Remove', service_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
                         </tr>
                     <% end %>
                     </tbody>
@@ -46,13 +46,11 @@
 <br>
 <!-- Added form to index page to render new service request on same page after creation: -->
 
-<div class="container" style="margin-top:10px">
+<div class="container" style="margin-top:10px" id="startrequest">
   
   <div class="col-md-6 col-md-offset-3 " style="padding-bottom:30px">
-    <h2>Start a new request:</h2>
+    <h2>Start a new request for service from the community:</h2>
 
       <%= render 'form' %>
-
-    <%= link_to 'Back', service_requests_path %>
   </div>
 </div>
