@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-
 before_action :logged_in?
 
 	def index
@@ -23,7 +22,8 @@ before_action :logged_in?
 
 	def logged_in?
 		if !user_signed_in?
-			redirect_to "/"
+			flash[:error] = "Please sign in first!"
+			redirect_to "/users/sign_in"
 		end
 	end
 end
