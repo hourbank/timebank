@@ -5,15 +5,15 @@
       <div class="panel-heading"><h3 class="panel-title"><strong>Log In</strong></h3></div>
         <div class="panel-body">
           <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <% if flash[:alert] %>
+              <div class="alert"><%= flash[:alert] %></div>
+            <% end %>
+
             <div class="field">
               <%= f.label :email %><br />
               <%= f.email_field :email, autofocus: true %>
             </div>
             
-<% if flash[:error] %>
-  <div class="error"><%= flash[:error] %></div>
-<% end %>
-
             <div class="field">
               <%= f.label :password %><br />
               <%= f.password_field :password, autocomplete: "off" %>
@@ -26,11 +26,11 @@
               </div>
             <% end -%>
 
-             <div class="actions">
+            <div class="actions">
               <%= f.submit "Log in" %>
             </div>
-           <% end %>
-              <%= render "devise/shared/links" %>
+          <% end %>
+          <%= render "devise/shared/links" %>
         </div>
       </div>
     </div>
