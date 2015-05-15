@@ -7,7 +7,23 @@ Users sign up for the Epoch web app and act as both a provider and recipient. Th
 
 Epoch is hosted live at http://epochbank.herokuapp.com/
 
+Contributors: Annie Pennell, James Bradley, Lyn Muldrow, and Steven Gordon
+
+The Trello board, containing the plan and many requirements, can be viewed here: https://trello.com/b/HGREwhBv/time-bank-app
+
+Overview of site flow, page contents, and views (service_requests/index uses AJAX):
+
 ![alt tag](http://i.imgur.com/8mzvFkU.png)
+
+Models:
+
+![alt tag](http://i.imgur.com/INUJdAr.png)
+
+API used: Twilio
+
+### User stories
+- https://docs.google.com/document/d/1ZqpuQ5uVsqs7olI2RHK1VU9CkcYs1f01N6gUWco54_k/edit
+- http://www.cram.com/flashcards/timebank-user-stories-5827205
 
 ## Scope:
 
@@ -84,3 +100,24 @@ Life cycle of an exchange
   - CONFIRM: Once the SP indicates the service has been delivered, the SR has to confirm that this was done, and confirm that the number of hours is correct.
     - Ideally, the SR should get a text after SP states delivery has happened, so that SR knows to go back to the website to confirm -- or ideally reply to SMS text with text confirmation
     - Need process to deal with disagreements over Delivery and Confirmation (e.g., over exact number of hours, or if it happened yet) 
+
+
+### Wishlist
+
+There are so many more things we would have loved to add with more time (and hopefully some that we can still get to)! Here are some of them.
+
+- Add portfolio picture option with Paperclip
+- Have an input form for "Please help me"--we got this started but couldn't quite finish
+- Allow for messaging between two users on an exchange page
+- User can search for and view profiles and requests by category of service and location
+- User ratings on services provided
+- Admin role
+- Allow for replying through text messages
+- Map user search results
+- Show recent activity on home page
+- Allow users to "reject" a proposal
+- Have a "hold hours" functionality to put a hold on hours while an exchange is between being accepted and finalized
+- Show total count of a user's exchanges on their profile page
+- Don't let user respond more than once to the same service request
+- Convert GET methods to POST or PUT for all exchange actions that write to database; use form-for instead link/button
+- Let users turn on/off their text alerts
