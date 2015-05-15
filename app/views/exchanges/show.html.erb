@@ -42,7 +42,7 @@ How long did service take?
 	<% if @exchange.stage[:stage_number] == 3 %>
 	  <% if @exchange.recipient == current_user %>
 		<h2>
-			<%= link_to 'Confirm that you received this', confirm_exchange_path(@exchange) %>
+         <button class="btn btn-default btn-md" ><%= link_to 'Confirm that you received this', confirm_exchange_path(@exchange) %></button>
 		</h2>
 	  <% end %>
 	<% end %>
