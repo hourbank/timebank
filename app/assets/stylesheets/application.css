@@ -18,6 +18,7 @@
 html {
     width: 100%;
     height: 100%;
+    background-color: #fdfdf8;
     
 }
 
@@ -47,7 +48,7 @@ h6 {
     padding-bottom: 50px;
     text-align: center;
     color: #ED6A5A;
-    background: url("/assets/sky.jpg") no-repeat center center;
+    background: url("/assets/time.jpeg") no-repeat center center;
     /*background-color: #ed6a5a;*/
     background-size: cover;
       overflow: hidden;
@@ -161,7 +162,7 @@ h6 {
 .banner {
     padding: 100px 0;
     color: #f8f8f8;
-    background: url("/assets/hands2.jpg") no-repeat center center;
+    background: url("/assets/bg.jpg") no-repeat center center;
     background-size: cover;
 }
 
@@ -486,9 +487,5 @@ h4 {
     padding-bottom: 20px;
 }
 
-
-#orangebutton {
-    color: #ED6A5A;
-}
 
 
