@@ -9,7 +9,7 @@
 		<% if flash[:error] %>
 			<br><br>
 			<div class="error"><%= flash[:error] %></div>
-			<% end %>
+		<% end %>
 
 			<% if @exchange.stage[:stage_number] == 1 %>
 			<% if @exchange.accepting_party == current_user %>
