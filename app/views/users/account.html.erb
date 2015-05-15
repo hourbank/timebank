@@ -1,11 +1,16 @@
-
-
 <div class="row">
   <div class="col-lg-12">
-    <div class="jumbotron">
+    <div class="jumbotron", style="text-align:center">
       <h1>Welcome, <%=@user.first_name %>!</h1>
-      <h3>You currently have <%= @user.time_balance %> hours in your account!</h3>
-        
+      <% if @user.time_balance == 1 %>
+        <h3>You currently have 1.0 hour in your account!</h3>
+      <% else %>
+        <h3>You currently have <%= @user.time_balance %> hours in your account!</h3>
+      <% end %>
+      <br>
+      <div style="text-align:center">
+        <button class="btn btn-default btn-md"><%= link_to 'View Profile', user_path(@user) %>
+      </div>
     </div>
   </div>
 <!-- /.col-lg-12 -->
@@ -13,71 +18,151 @@
 <!-- /.row -->
 <br>
 
-<div>
-  <h4>Account Information</h4>
-  <p>
-    Name: <%= @user.first_name %> <%= @user.last_name %><br>
-    Email: <%= @user.email %><br>
-    Phone: <%= @user.phone %><br>
-    Services offered: <%= @user.services_offered %><br>
-    City: <%= @user.city %><br>
-    Zipcode: <%= @user.zipcode %><br>
-    <%= link_to "Edit", edit_registration_path(@user) %>
-  </p>
-  <p><%= link_to "View Profile", user_path(@user) %></p>
+<div class="col-lg-12">
+  <div class="container">
+    <div class="col-md-6 col-md-offset-3 " style="padding-bottom:30px">
+      <div class="panel panel-warning" style="margin-top:10px" id="startrequest">
+        <div class="panel-heading" style="text-align:center">
+          <h2>Account information</h2>
+        </div>
+        <div class="panel-body">
+          <table class="table">
+            <tbody>
+              <td>Name</td>
+              <td><%= @user.first_name %> <%= @user.last_name %></td>
+            </tbody>
+            <tbody>
+              <td>Email</td>
+              <td><%= @user.email %></td>
+            </tbody>
+            <tbody>
+              <td>Phone</td>
+              <td><%= @user.phone %></td>
+            </tbody>
+            <tbody>
+              <td>Services</td>
+              <td><%= @user.services_offered %></td>
+            </tbody>
+            <tbody>
+              <td>City</td>
+              <td><%= @user.city %></td>
+            </tbody>
+            <tbody>
+              <td>Zipcode</td>
+              <td><%= @user.zipcode %></td>
+            </tbody>
+          </table>
+          <div style="text-align:center">
+            <button class="btn btn-default btn-md"><%= link_to 'Edit Account', edit_registration_path(@user) %><br>
+          </div><br>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-<br>
 
-<div>
-  <h4>Your current service requests</h4>
-  <p>
-    <% @requests.where(:requested_by_id => @user.id).each do |r| %>
-      <div>
-        <a href="/service_requests/<%= r.id %>"><strong><%= r.title %></strong></a>
-        <%= r.created_at %><br>
-        <%= r.description %><br>
-        Estimated hours: <%= r.estimated_hours %><br>
-        Location: <%= r.location %><br>
-        Timing: <%= r.timing %><br>   
-        <%= link_to "Edit", edit_service_request_path(r) %> | <%= link_to "Destroy", r, method: :delete, data: { confirm: "Are you sure?" } %>   
-      </div><br>
-    <% end %>
-  </p>
-</div>
-<br>
 
-<div>
-  <h4>Your Exchanges</h4>
-  <p>
-    <% @exchanges.each do |e| %>
-      <% if e.provided_by_id == @user.id %>
-        <%= e.created_at %>
-        <a href="/exchanges/<%= e.id %>"><%= e.title %></a><br>
-        Recipient: <%= e.recipient.first_name %><br>
-        <% if e.confirmed == true %>
-          Status: Confirmed
-        <% elsif e.delivered == true %>
-          Status: Delivered, pending confirmation
-        <% elsif e.accepted == true %>
-          Status: Accepted, pending delivery
-        <% else %>
-          Status: Proposed, pending acceptance  
-        <% end %><br><br>
-      <% end %>
-      <% if e.received_by_id == @user.id %>
-        <%= e.created_at %>
-        <a href="/exchanges/<%= e.id %>"><%= e.title %></a><br>
-        Provider: <%= e.provider.first_name %>
-        <% if e.confirmed == true %>
-          Status: Confirmed
-        <% elsif e.delivered == true %>
-          Status: Delivered, pending confirmation
-        <% elsif e.accepted == true %>
-          Status: Accepted, pending delivery
-        <% else %>
-          Status: Proposed, pending acceptance  
-        <% end %><br><br>
-      <% end %>
-    <% end %>
-  </p>
+<!-- Show all of current user's active service requests -->
+<div class="col-lg-12">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-success">
+        <div class="panel-heading">
+          <h3>Your current service requests</h3>
+        </div>
+          <!-- /.panel-heading -->
+          <div class="panel-body">
+            <div class="table-responsive table-bordered">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Estimated hours</th>
+                    <th>Location</th>
+                    <th>Timing</th>
+                    <th>Requested by</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @requests.where(:requested_by_id => @user.id).each do |r| %>
+                    <tr id='srs'>
+                      <td><%= link_to r.title, r %></td>
+                      <td><%= r.description %></td>
+                      <td><%= r.estimated_hours %></td>
+                      <td><%= r.location %></td>
+                      <td><%= r.timing %></td>       
+                      <td><%= r.recipient.first_name %></td>
+                      <td><button class="btn btn-default btn-md"><%= link_to 'More info', r %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          <!-- /.table-responsive -->
+          </div>
+          <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+      </div>
+      <!-- /.col-lg-6 -->
+    </div>
+  <div>
+
+  <!-- Show all of current user's exchanges -->
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-warning">
+        <div class="panel-heading">
+          <h3>Your Exchanges</h3>
+        </div>
+          <!-- /.panel-heading -->
+          <div class="panel-body">
+            <div class="table-responsive table-bordered">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Creation Date</th>
+                    <th>Exchange</th>
+                    <th>Provider</th>
+                    <th>Recipient</th>
+                    <th>Status</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @exchanges.each do |e| %>
+                    <tr id='srs'>
+                      <td><%= e.created_at %></td>               
+                      <td><%= link_to e.title, e %></td>
+                      <td><%= e.provider.first_name %></td>
+                      <td><%= e.recipient.first_name %></td>       
+                      <td>
+                        <% if e.confirmed == true %>
+                          Status: Confirmed
+                        <% elsif e.delivered == true %>
+                          Status: Delivered, pending confirmation
+                        <% elsif e.accepted == true %>
+                          Status: Accepted, pending delivery
+                        <% else %>
+                          Status: Proposed, pending acceptance  
+                        <% end %>
+                      </td>
+                      <td><button class="btn btn-default btn-md"><%= link_to 'View', e %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          <!-- /.table-responsive -->
+          </div>
+          <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+      </div>
+      <!-- /.col-lg-6 -->
+    </div>
+  </div>
 </div>
+
