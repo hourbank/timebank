@@ -1,30 +1,7 @@
 
 <center><h2>My Exchange Timeline</h2></center>
 <br>
-<div class="container">
-	<div class= "col-md-4 col-md-8 col-md-offset-2">
-        <div class="panel panel-green">
-            <div class="panel-heading">
-                <div class="row">
-                   <div class="col-xs-3">
-                       <i class="fa fa-tasks fa-5x"></i>
-                   </div>
-               <div class="col-md-6 text-right" style="padding:20px">
-                    <div class="huge"><%= @exchange.estimated_hours %></div>
-                       <center><div>Estimated Hours</div></center>
-                </div>
-                <br><br>
-                <div class="col-md-6 text-center" style="padding:20px">
-                <div class="huge"><%= @exchange.final_hours %></div>
-                       <center><div>Final Hours</div></center>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="container">
+<center>
        <!-- ACCEPT a proposed exchange -->
 		<!-- Only allow the counter-party to the Proposed Exchange to accept (i.e., the person who did not propose it) -->
 
@@ -37,7 +14,7 @@
 			<% if @exchange.stage[:stage_number] == 1 %>
 			<% if @exchange.accepting_party == current_user %>
 			<h2>
-				<button class="btn btn-default btn-md"><%= link_to 'Accept this proposal', accept_exchange_path(@exchange) %></button>
+				<button class="btn btn-default btn-md" ><%= link_to 'Accept this proposal', accept_exchange_path(@exchange) %></button>
 			</h2>
 			<% end %>
 		<% end %>
@@ -77,12 +54,41 @@
 	</h2>
 	<% end %>
 	<% end %>
+	</center>
+
+	<br><br>
+
+<div class="container">
+	<div class= "col-md-4 col-md-8 col-md-offset-2">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <div class="row">
+                   <div class="col-xs-3">
+                       <i class="fa fa-tasks fa-5x"></i>
+                   </div>
+               <div class="col-md-6 text-right" style="padding:20px">
+                    <div class="huge"><%= @exchange.estimated_hours %></div>
+                       <center><div>Estimated Hours</div></center>
+                </div>
+                <br><br>
+                <div class="col-md-6 text-center" style="padding:20px">
+                <div class="huge"><%= @exchange.final_hours %></div>
+                       <center><div>Final Hours</div></center>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+
+	
+
+
 
 
 <div class="container">
 <div class="col-md-4 col-md-8 ">
-<div class="panel panel-green">
+<div class="panel panel-success">
 <center>
 	<h1><%= @exchange.title %></h1>
 
@@ -100,6 +106,7 @@ Location: <%= @exchange.location %><br>
 </div>
 </div>
 </div>
+
 
 <div class="col-md-8 col-md-offset-2">
 <div class="panel panel-green">

@@ -28,8 +28,8 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: proxima-nova, "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-weight: 700;
+     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+   font-weight: 300;
 }
 
 .topnav {
@@ -46,8 +46,8 @@ h6 {
     padding-top: 50px; 
     padding-bottom: 50px;
     text-align: center;
-    color: #f8f8f8;
-    background: url("/assets/time.jpeg") no-repeat center center;
+    color: #ED6A5A;
+    background: url("/assets/sky.jpg") no-repeat center center;
     /*background-color: #ed6a5a;*/
     background-size: cover;
       overflow: hidden;
@@ -75,12 +75,16 @@ h6 {
     position: relative;
     padding-top: 20%;
     padding-bottom: 20%;
+    font-family: proxima-nova, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    font-size: 30px;
 }
 
 .intro-message > h1 {
     margin: 0;
     text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
     font-size: 5em;
+    font-family: 
 }
 
 .intro-divider {
@@ -127,13 +131,14 @@ h6 {
 
 .content-section-a {
     padding: 50px 0;
-    background-color: #f8f8f8;
+    background-color: #FAF3DD;
 }
 
 .content-section-b {
     padding: 50px 0;
     border-top: 1px solid #e7e7e7;
     border-bottom: 1px solid #e7e7e7;
+    background-color: #fdfdf8;
 }
 
 .section-heading {
@@ -156,7 +161,7 @@ h6 {
 .banner {
     padding: 100px 0;
     color: #f8f8f8;
-    background: url("/assets/green.jpg") no-repeat center center;
+    background: url("/assets/hands2.jpg") no-repeat center center;
     background-size: cover;
 }
 
@@ -226,7 +231,7 @@ p.copyright {
 }
 
 .team-member p {
-    font-family:proxima-nova, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: proxima-nova, "Helvetica Neue", Helvetica, Arial, sans-serif;
     margin-top: 0;
 }
 
@@ -252,7 +257,7 @@ h4 {
  border:0 solid #fff; 
  border-bottom-width:1px;
  padding-bottom:10px;
- font-family: Optima, Segoe, 'Segoe UI', Candara, Calibri, Arial, sans-serif;
+ font-family: proxima-nova, "Helvetica Neue", Helvetica, Arial, sans-serif;
  text-align: center;
 }
 
@@ -482,6 +487,8 @@ h4 {
 }
 
 
-
+#orangebutton {
+    color: #ED6A5A;
+}
 
 
