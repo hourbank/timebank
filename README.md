@@ -26,58 +26,58 @@ MVP V1.0: Using Time Bank, users must be able to:
 - View profiles of one specific user -- to see what services they can offer
   - But do NOT show the specific exchanges other users have done or their activity feed for MVP
 - Create a “Wanted Listing” that includes
-  a. Title
-  b. Description
-  c. Approximate duration (hours)
-  d. Timing (in narrative form) i.e., when this needs to happen
-  e. Location (in text)
-5. View all Wanted Listings 
-6. View a specific Wanted Listing
-  a. With “I can do that for you” button that triggers API
-7. View list of all service providers (i.e., all users)
-  a. in MVP, just list their names and their text description of services
-8. Negotiation over exchange details is off-site → provide phone # and email once an exchange is ACCEPTED (don’t show contact info when exchange is just PROPOSED -- to avoid the “creepy Annie” issue… :)
-9. Exchange page (both people involved, status of exchange)
-10. See own user’s account page
-11. Manage the lifecycle of an exchange, by approving each next step (e.g., Accept proposal, Delivery complete, Confirm exchange) -- on exchange page
+  - Title
+  - Description
+  - Approximate duration (hours)
+  - Timing (in narrative form) i.e., when this needs to happen
+  - Location (in text)
+- View all Wanted Listings 
+- View a specific Wanted Listing
+  - With “I can do that for you” button that triggers API
+- View list of all service providers (i.e., all users)
+  - in MVP, just list their names and their text description of services
+- Negotiation over exchange details is off-site → provide phone # and email once an exchange is ACCEPTED (don’t show contact info when exchange is just PROPOSED -- to avoid the “creepy Annie” issue… :)
+- Exchange page (both people involved, status of exchange)
+- See own user’s account page
+- Manage the lifecycle of an exchange, by approving each next step (e.g., Accept proposal, Delivery complete, Confirm exchange) -- on exchange page
 
 Phase Two (Our stretch goal) V2: Using Time Bank, users should be able to:
-1. One exchange has_many comments → On-site negotiations rather than just give each other phone & email
-2. “Please help me” input form with more details for exchange page
-3. Show total # of hours exchanged for the whole site/community
-4. Let users remove as “completed” Service Requests without deleting them
-5. Categories of services on profile pages and on all-users-list
-  a. On user profile, allow categories (not just text description) of services you can offer, to allow for better searching and browsing
-  b. Browse services available from other users by category, not just by list of names
-6. Search functionality -- to find services, people, nearby people, etc.
-7. Ratings on services provided
+- One exchange has_many comments → On-site negotiations rather than just give each other phone & email
+- “Please help me” input form with more details for exchange page
+- Show total # of hours exchanged for the whole site/community
+- Let users remove as “completed” Service Requests without deleting them
+- Categories of services on profile pages and on all-users-list
+  - On user profile, allow categories (not just text description) of services you can offer, to allow for better searching and browsing
+  - Browse services available from other users by category, not just by list of names
+- Search functionality -- to find services, people, nearby people, etc.
+- Ratings on services provided
 
 Future V3 (OUT OF SCOPE FOR THIS PROJECT #2): Using Time Bank, users could be able to:
-1. Admin role with editing power
-2. Offer services to a particular user -- even if they have not posted a “Service Requested”
-3. Make timing of service wanted or exchange less text-y and more data-y and thus searchable/filterable
-4. Allow users to “reject” a proposal they don’t want (so they don’t have to see it anymore in the proposed list and also proposer knows it’s over…)
-5. Follow up with users when an exchange gets hung up for too long in one stage
-6. Send alerts to SP if there is a new Wanted post that matches your abilities
-7. Show recent activity to make the home page fresh & vibrant
-8. Get SMS text alerts in more situations and let users REPLY to SMS messages and have our site receive and process the reply (e.g., to confirm an exchange)
-  a. For when someone makes “Service Offer” to you
-  b. To confirm service
-  c. To confirm your phone number when you sign up
+- Admin role with editing power
+- Offer services to a particular user -- even if they have not posted a “Service Requested”
+- Make timing of service wanted or exchange less text-y and more data-y and thus searchable/filterable
+- Allow users to “reject” a proposal they don’t want (so they don’t have to see it anymore in the proposed list and also proposer knows it’s over…)
+- Follow up with users when an exchange gets hung up for too long in one stage
+- Send alerts to SP if there is a new Wanted post that matches your abilities
+- Show recent activity to make the home page fresh & vibrant
+- Get SMS text alerts in more situations and let users REPLY to SMS messages and have our site receive and process the reply (e.g., to confirm an exchange)
+  - For when someone makes “Service Offer” to you
+  - To confirm service
+  - To confirm your phone number when you sign up
 
 Life cycle of an exchange
-PROPOSAL: There are two ways to initiate an exchange
-  - “Recipient” (R) can post “Wanted” listing describing the service they want to receive
-    - Then a “ Provider” (“P”) can look through the Service Requests and make an offer to the R. (“I can do it” button = PROPOSAL from SP to SR)
-    - From a database perspective, this creates a new row in “Exchange” with status:Proposed, proposed_by:SP_id, and linked to Wanted listing id. (Or Proposal_type indicating where it started?)
-  - Or SR can ask a particular SP to provide a service, without first posting a “Wanted” listing but rather by browsing the SPs (or even having a prior experience with the SP) and clicking a “Please help me” button on the SP’s profile page. (“Please help me” button = PROPOSAL from SR to SP)
-    - From a database perspective, this also creates a new row in “Exchange” with status:Proposed, proposed_by:SR_id, provided_by:
-    - For MVP, “naked” (empty) Exchange appears in P’s list.  Ideally, allow entry of more info.
-ACCEPT: The counter-party (whoever did NOT propose the exchange) needs to ACCEPT the proposal.  Either SR or SP should be notified (ideally by SMS but otherwise on website) that they have a proposal waiting for their review.
-If it was an “I can do it” PROPOSAL, the SR has to decide they want the service from this particular SP.
-If it was a “Please help me” PROPOSAL, the SP has to agree they want to provide their service to this particular SR.
-PLAN: After acceptance, the two users plan the details of the exchange.  This can be through comments on a page that shows the PROPOSAL and ACCEPTANCE and is only accessible (via authorization) to those two users.
-DELIVER: After the service is delivered, the SP (who has the incentive to earn the hours) needs to indicate that the service was delivered and confirm the exact final number of hours.  SP needs to visit the website to do this.
-CONFIRM: Once the SP indicates the service has been delivered, the SR has to confirm that this was done, and confirm that the number of hours is correct.
-Ideally, the SR should get a text after SP states delivery has happened, so that SR knows to go back to the website to confirm -- or ideally reply to SMS text with text confirmation
-Need process to deal with disagreements over Delivery and Confirmation (e.g., over exact number of hours, or if it happened yet) 
+  - PROPOSAL: There are two ways to initiate an exchange
+    - “Recipient” (R) can post “Wanted” listing describing the service they want to receive
+      - Then a “ Provider” (“P”) can look through the Service Requests and make an offer to the R. (“I can do it” button = PROPOSAL from SP to SR)
+      - From a database perspective, this creates a new row in “Exchange” with status:Proposed, proposed_by:SP_id, and linked to Wanted listing id. (Or Proposal_type indicating where it started?)
+    - Or SR can ask a particular SP to provide a service, without first posting a “Wanted” listing but rather by browsing the SPs (or even having a prior experience with the SP) and clicking a “Please help me” button on the SP’s profile page. (“Please help me” button = PROPOSAL from SR to SP)
+      - From a database perspective, this also creates a new row in “Exchange” with status:Proposed, proposed_by:SR_id, provided_by:
+      - For MVP, “naked” (empty) Exchange appears in P’s list.  Ideally, allow entry of more info.
+  - ACCEPT: The counter-party (whoever did NOT propose the exchange) needs to ACCEPT the proposal.  Either SR or SP should be notified (ideally by SMS but otherwise on website) that they have a proposal waiting for their review.
+    - If it was an “I can do it” PROPOSAL, the SR has to decide they want the service from this particular SP.
+    - If it was a “Please help me” PROPOSAL, the SP has to agree they want to provide their service to this particular SR.
+  - PLAN: After acceptance, the two users plan the details of the exchange.  This can be through comments on a page that shows the PROPOSAL and ACCEPTANCE and is only accessible (via authorization) to those two users.
+  - DELIVER: After the service is delivered, the SP (who has the incentive to earn the hours) needs to indicate that the service was delivered and confirm the exact final number of hours.  SP needs to visit the website to do this.
+  - CONFIRM: Once the SP indicates the service has been delivered, the SR has to confirm that this was done, and confirm that the number of hours is correct.
+    - Ideally, the SR should get a text after SP states delivery has happened, so that SR knows to go back to the website to confirm -- or ideally reply to SMS text with text confirmation
+    - Need process to deal with disagreements over Delivery and Confirmation (e.g., over exact number of hours, or if it happened yet) 
