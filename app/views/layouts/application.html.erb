@@ -108,14 +108,16 @@
                     <li>
                          <%= link_to "Contact", contact_path %>
                     </li>
+               <% if !user_signed_in? %>
                     <li class="footer-menu-divider">⋅</li>
                     <li>
-                        <%= link_to "Sign Up",new_user_registration_path %>
+                     <%= link_to "Sign Up",new_user_registration_path %>
                     </li>
                     <li class="footer-menu-divider">⋅</li>
                     <li>
-                        <%= link_to "Log In", new_user_session_path %>
+                     <%= link_to "Log In", new_user_session_path %>
                     </li>
+                <% end %>
                     </ul>
                     <p class="copyright text-muted small">Copyright &copy; General Assembly WDI Team 2, 2015. All Rights Reserved.</p>
                 </div>
