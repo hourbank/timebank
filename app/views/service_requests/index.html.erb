@@ -3,7 +3,7 @@
 
  <div class="row">
                 <div class="col-lg-12">
-                    <div class="panel panel-info">
+                    <div class="panel panel-green">
                         <div class="panel-heading">
                             <h3>Community Requests</h3>
                         </div>
@@ -30,11 +30,7 @@
                                         <td><%= service_request.location %></td>
                                         <td><%= service_request.timing %></td>       
                                         <td><%= service_request.recipient.first_name %></td>
-                                        <td><button class="btn btn-info btn-md"><%= link_to 'More info', service_request %></td>
-                                        <% if service_request.recipient == @current_user %>
-                                          <td><button class="btn btn-info btn-md"><%= link_to 'Edit', edit_service_request_path(service_request) %></button></td>
-                                          <td><button class="btn btn-info btn-md"><%= link_to 'Remove', service_request, method: :delete, data: { confirm: 'Are you sure?' } %></button></td>
-                                          <% end %>
+                                        <td><button class="btn btn-default btn-md"><%= link_to 'More info', service_request %></td>
                                         </tr>
                                     <% end %>
                                    </tbody>
