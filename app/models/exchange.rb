@@ -2,6 +2,9 @@ class Exchange < ActiveRecord::Base
   belongs_to :provider, class_name: "User", foreign_key: "provided_by_id"
   belongs_to :recipient, class_name: "User", foreign_key: "received_by_id"
 
+  # validates final hours are a number and greater than 0
+  validates :final_hours, :numericality => {:only_integer => true, :greater_than => 0}
+
   def self.total_hours
     memo = 0
     self.all.each do |each_exchange|
