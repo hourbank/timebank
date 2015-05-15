@@ -46,4 +46,18 @@ class ApplicationController < ActionController::Base
 		 :to => "+1" + phone,
 		 :from => "+16503895939")
   end
+
+  def total_bank_hours
+    # Calculate total hours exchanged on the site to display as measure of impact
+    all_ex = Exchange.all
+    memo = 0
+    all_ex.each do |e|
+      if e.final_hours != nil
+        memo = memo + e.final_hours
+      end
+    end
+
+   return memo
+  end
+
 end
