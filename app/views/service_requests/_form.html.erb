@@ -12,6 +12,9 @@
       </ul>
     </div>
   <% end %>
+  <% if flash[:alert] %>
+    <div class="alert"><%= flash[:alert] %></div>
+  <% end %>
 
   <div class="field">
     <%= f.label :title %><br>
@@ -34,5 +37,5 @@
     <%= f.text_area :timing %>
   </div>
   <div class="actions">
-    <%= f.submit "Create service request", class: "btn btn-default btn-md" %>
+    <%= f.submit "Create service request", class: "btn btn-success btn-md" %>
 <% end %>

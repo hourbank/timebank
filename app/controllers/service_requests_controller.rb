@@ -5,7 +5,7 @@ class ServiceRequestsController < ApplicationController
   # GET /service_requests
   # GET /service_requests.json
   def index
-    @service_requests = ServiceRequest.all
+    @service_requests = ServiceRequest.all.order(created_at: :desc)
     @service_request = ServiceRequest.new
     @current_user = current_user
   end
