@@ -19,6 +19,7 @@
     <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -107,14 +108,16 @@
                     <li>
                          <%= link_to "Contact", contact_path %>
                     </li>
+               <% if !user_signed_in? %>
                     <li class="footer-menu-divider">⋅</li>
                     <li>
-                        <%= link_to "Sign Up",new_user_registration_path %>
+                     <%= link_to "Sign Up",new_user_registration_path %>
                     </li>
                     <li class="footer-menu-divider">⋅</li>
                     <li>
-                        <%= link_to "Log In", new_user_session_path %>
+                     <%= link_to "Log In", new_user_session_path %>
                     </li>
+                <% end %>
                     </ul>
                     <p class="copyright text-muted small">Copyright &copy; General Assembly WDI Team 2, 2015. All Rights Reserved.</p>
                 </div>
