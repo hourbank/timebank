@@ -24,60 +24,61 @@
 </div>
 
 
+<div class="container">
+       <!-- ACCEPT a proposed exchange -->
+		<!-- Only allow the counter-party to the Proposed Exchange to accept (i.e., the person who did not propose it) -->
 
-                                            <!-- ACCEPT a proposed exchange -->
-											<!-- Only allow the counter-party to the Proposed Exchange to accept (i.e., the person who did not propose it) -->
+		<!-- flash error if insufficient balance -->
+		<% if flash[:error] %>
+			<br><br>
+			<div class="error"><%= flash[:error] %></div>
+			<% end %>
 
-											<!-- flash error if insufficient balance -->
-											<% if flash[:error] %>
-											  <br><br>
-											  <div class="error"><%= flash[:error] %></div>
-											<% end %>
-
-											<% if @exchange.stage[:stage_number] == 1 %>
-												<% if @exchange.accepting_party == current_user %>
-													<h2>
-													<button class="btn btn-default btn-md"><%= link_to 'Accept this proposal', accept_exchange_path(@exchange) %></button>
-													</h2>
-												<% end %>
-											<% end %>
+			<% if @exchange.stage[:stage_number] == 1 %>
+			<% if @exchange.accepting_party == current_user %>
+			<h2>
+				<button class="btn btn-default btn-md"><%= link_to 'Accept this proposal', accept_exchange_path(@exchange) %></button>
+			</h2>
+			<% end %>
+		<% end %>
 
 
   <!-- DELIVER an accepted exchange -->
-											<!-- Only allow the PROVIDER of the Accepted Exchange to deliver -->
-											<!-- NEED TO ADD FORM FOR FINAL HOURS! -->
+	<!-- Only allow the PROVIDER of the Accepted Exchange to deliver -->
+	<!-- NEED TO ADD FORM FOR FINAL HOURS! -->
 
-											<% if @exchange.stage[:stage_number] == 2 %>
-												<% if @exchange.provider == current_user %>
+	<% if @exchange.stage[:stage_number] == 2 %>
+	<% if @exchange.provider == current_user %>
 
-													<!-- How many hours did this service actually take?
-													NEEDS TEXT ENTRY FIELD FOR PERSON TO ENTER NUMBER
-													CONFIRM BUTTON IS SUBMIT 
-													Variable name should be "entered_hours"
-													BUTTON HAS TO BE A -->
-													<%= form_for(@exchange, url: deliver_exchange_path(@exchange), html: {method: "get"}) do |f| %>
+	<!-- How many hours did this service actually take?
+	NEEDS TEXT ENTRY FIELD FOR PERSON TO ENTER NUMBER
+	CONFIRM BUTTON IS SUBMIT 
+	 name should be "entered_hours"
+	BUTTON HAS TO BE A -->
+		<%= form_for(@exchange, url: deliver_exchange_path(@exchange), html: {method: "get"}) do |f| %>
 
-													<%= f.text_field :final_hours, placeholder: "How long did it take?" %>
-													<%= f.submit "Confirm exchange" %>
+		<%= f.text_field :final_hours, placeholder: "How long did it take?" %>
+		<%= f.submit "Confirm exchange" %>
 
-													<% end %>
+	<% end %>
 
-															<%= link_to 'Confirm that you have done this', deliver_exchange_path(@exchange) %>
+		<%= link_to 'Confirm that you have done this', deliver_exchange_path(@exchange) %>
 
-												<% end %>
-											<% end %>
+	<% end %>
+	<% end %>
 <!-- CONFIRM a delivered exchange -->
-											<!-- Only allow the RECIPIENT of the Delivered Exchange to confirm -->
-											<!-- NEED TO ADD FORM FOR FINAL HOURS! -->
+<!-- Only allow the RECIPIENT of the Delivered Exchange to confirm -->
+<!-- NEED TO ADD FORM FOR FINAL HOURS! -->
 
-											<% if @exchange.stage[:stage_number] == 3 %>
-												<% if @exchange.recipient == current_user %>
-													<h2>
-													<%= link_to 'Confirm that you received this', confirm_exchange_path(@exchange) %>
-													</h2>
-												<% end %>
-											<% end %>
-											
+	<% if @exchange.stage[:stage_number] == 3 %>
+	<% if @exchange.recipient == current_user %>
+	<h2>
+		<%= link_to 'Confirm that you received this', confirm_exchange_path(@exchange) %>
+	</h2>
+	<% end %>
+	<% end %>
+</div>
+
 
 <div class="container">
 <div class="col-md-4 col-md-8 ">
