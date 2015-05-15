@@ -12,6 +12,9 @@
       </ul>
     </div>
   <% end %>
+  <% if flash[:alert] %>
+    <div class="alert"><%= flash[:alert] %></div>
+  <% end %>
 
   <div class="field">
     <%= f.label :title %><br>

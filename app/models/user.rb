@@ -16,10 +16,10 @@ class User < ActiveRecord::Base
     self.phone.gsub!(/[^0-9]/, '')
   end
 
-  
-  validates_length_of :phone, :minimum => 10, :maximum => 10
-  validates_length_of :zipcode, :minimum => 5, :maximum => 5
-
+  # validate that phone number is only 10 numbers
+  validates_length_of :phone, :is => 10
+  # validate that zipcode is only 5 numbers
+  validates_length_of :zipcode, :is => 5
 
   # require all fields be filled out when registering
   validates_presence_of :first_name, :last_name, :phone, :services_offered, :city, :zipcode, :time_balance
