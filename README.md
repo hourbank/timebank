@@ -9,6 +9,9 @@ Epoch is hosted live at http://epochbank.herokuapp.com/
 
 Contributors: Annie Pennell, James Bradley, Lyn Muldrow, and Steven Gordon
 
+
+## Scope:
+
 The Trello board, containing the plan and many requirements, can be viewed here: https://trello.com/b/HGREwhBv/time-bank-app
 
 Overview of site flow, page contents, and views (service_requests/index uses AJAX):
@@ -25,7 +28,7 @@ API used: Twilio
 - https://docs.google.com/document/d/1ZqpuQ5uVsqs7olI2RHK1VU9CkcYs1f01N6gUWco54_k/edit
 - http://www.cram.com/flashcards/timebank-user-stories-5827205
 
-## Scope:
+# Overall scope outline
 
 MVP V1.0: Using Time Bank, users must be able to:
 - Log in and log out securely, and sign up -- after all, this is a bank! :)
