@@ -156,7 +156,7 @@ h6 {
 .banner {
     padding: 100px 0;
     color: #f8f8f8;
-    background: url("/assets/86H.jpg") no-repeat center center;
+    background: url("/assets/green.jpg") no-repeat center center;
     background-size: cover;
 }
 
@@ -285,11 +285,11 @@ h4 {
 }
 
 .panel-green a {
-    color: #fff;
+    color: #9AB87A;
 }
 
 .panel-green a:hover {
-    color: #fff;
+    color: #cfcfcf;
 }
 
 
