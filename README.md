@@ -2,28 +2,30 @@
 
 
 Epoch is a time banking system that allows users to receive services using the currency of their time, which is earned by providing other users with their own services. Every hour of work for someone else is added to their time bank, which can be spent getting help from another user. 
+
 Users sign up for the Epoch web app and act as both a provider and recipient. They list services they can provide as well as services they need. Users can offer to render a service wanted or request that a specific user help them. When a request is made, a text message alert is sent to the the user receiving the request. An exchange page is generated when a request is made and, once accepted, they receive each other's contact information. After service is rendered, this is confirmed on the site and the hour is transferred from the recipient to the provider's time bank. A text message alert is sent to the user at each of the 4 stages of the exchange process--when it is proposed, accepted, delivered, and confirmed. 
 
 
-# Scope:
+## Scope:
+
 MVP V1.0: Using Time Bank, users must be able to:
-1. Log in and log out securely, and sign up -- after all, this is a bank! :)
+- Log in and log out securely, and sign up -- after all, this is a bank! :)
   a.Keep in mind Admin role (with Devise) which is needed for V1.1
-2. Create and edit your own profile that includes
-  a. Name
-  b. Email
-  c. Phone
-  d. Photo
-  e. Your location (City and Zipcode)
-  f. What services/skills you can offer
-    i.Text to describe your services for MVP
-  g. Calculated fields on the profile page:
-    i.See all the exchanges that you have been part of (either as provider or recipient) -- and the current status of each exchange (see below for lifecycle)
-    ii. See your current balance of hours available
-    iii. How many exchanges you’ve done and how many hours earned/spent. (Build some ‘credibility’ in the community this way)
-3. View profiles of one specific user -- to see what services they can offer
-  a. But do NOT show the specific exchanges other users have done or their activity feed for MVP
-4. Create a “Wanted Listing” that includes
+- Create and edit your own profile that includes
+  - Name
+  - Email
+  - Phone
+  - Photo
+  - Your location (City and Zipcode)
+  - What services/skills you can offer
+    - Text to describe your services for MVP
+  - Calculated fields on the profile page:
+    - See all the exchanges that you have been part of (either as provider or recipient) -- and the current status of each exchange (see below for lifecycle)
+    - See your current balance of hours available
+    - How many exchanges you’ve done and how many hours earned/spent. (Build some ‘credibility’ in the community this way)
+- View profiles of one specific user -- to see what services they can offer
+  - But do NOT show the specific exchanges other users have done or their activity feed for MVP
+- Create a “Wanted Listing” that includes
   a. Title
   b. Description
   c. Approximate duration (hours)
@@ -66,11 +68,11 @@ Future V3 (OUT OF SCOPE FOR THIS PROJECT #2): Using Time Bank, users could be ab
 Life cycle of an exchange
 PROPOSAL: There are two ways to initiate an exchange
   - “Recipient” (R) can post “Wanted” listing describing the service they want to receive
-    -Then a “ Provider” (“P”) can look through the Service Requests and make an offer to the R. (“I can do it” button = PROPOSAL from SP to SR)
-    -From a database perspective, this creates a new row in “Exchange” with status:Proposed, proposed_by:SP_id, and linked to Wanted listing id. (Or Proposal_type indicating where it started?)
-  -Or SR can ask a particular SP to provide a service, without first posting a “Wanted” listing but rather by browsing the SPs (or even having a prior experience with the SP) and clicking a “Please help me” button on the SP’s profile page. (“Please help me” button = PROPOSAL from SR to SP)
-    -From a database perspective, this also creates a new row in “Exchange” with status:Proposed, proposed_by:SR_id, provided_by:
-    -For MVP, “naked” (empty) Exchange appears in P’s list.  Ideally, allow entry of more info.
+    - Then a “ Provider” (“P”) can look through the Service Requests and make an offer to the R. (“I can do it” button = PROPOSAL from SP to SR)
+    - From a database perspective, this creates a new row in “Exchange” with status:Proposed, proposed_by:SP_id, and linked to Wanted listing id. (Or Proposal_type indicating where it started?)
+  - Or SR can ask a particular SP to provide a service, without first posting a “Wanted” listing but rather by browsing the SPs (or even having a prior experience with the SP) and clicking a “Please help me” button on the SP’s profile page. (“Please help me” button = PROPOSAL from SR to SP)
+    - From a database perspective, this also creates a new row in “Exchange” with status:Proposed, proposed_by:SR_id, provided_by:
+    - For MVP, “naked” (empty) Exchange appears in P’s list.  Ideally, allow entry of more info.
 ACCEPT: The counter-party (whoever did NOT propose the exchange) needs to ACCEPT the proposal.  Either SR or SP should be notified (ideally by SMS but otherwise on website) that they have a proposal waiting for their review.
 If it was an “I can do it” PROPOSAL, the SR has to decide they want the service from this particular SP.
 If it was a “Please help me” PROPOSAL, the SP has to agree they want to provide their service to this particular SR.
