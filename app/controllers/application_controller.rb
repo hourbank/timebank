@@ -28,15 +28,15 @@ class ApplicationController < ActionController::Base
   	# This is the Twillio account information (SID and auth_token for whichever account we are using)
     # New real SID
     account_sid = 'AC91d1e215d5a331ce1abc7decf99384cd' 
-  	
+
     auth_token = ENV["api_authorization_token"]
 
 	  @client = Twilio::REST::Client.new account_sid, auth_token
 
 	  message = @client.account.messages.create(
-		 :body => message,
-		 :to => "+1" + phone,
-		 :from => "+16503895939")
+		  :body => message,
+		  :to => "+1" + phone,
+		  :from => "+16503895939")
   end
 
   def total_bank_hours
