@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   # Manual routes for all the rest
   get "/about", to: "site#about"
+  
   get "/contact", to: "site#contact"
 
   # show all users

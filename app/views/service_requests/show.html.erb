@@ -1,60 +1,56 @@
 <p id="notice"><%= notice %></p>
 
 <div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-success">
+        <div class="panel-heading">
+          <h2> <%= @service_request.title %></h2>
+        </div>
+        <div class="panel-body2" style="padding:20px">
+          <p>
+            <%= @service_request.description %>
+          </p>
+        </div>
+        <div class="panel-body2">
+          <!-- if it is the current user's post, show edit and remove links -->
+          <center>
+            <% if @service_request.requested_by_id == @current_user.id %>
+              <button class="btn btn-success btn-md"><%= link_to 'Edit this request', edit_service_request_path(@service_request) %></button> 
+            <% end %>              
+            <% if @service_request.recipient == @current_user %>                
+              <td><button class="btn btn-success btn-md"><%= link_to 'Remove', @service_request, method: :delete, data: { confirm: 'Are you sure?' } %></button></td>        
+            <% end %>
+          </center>
 
-<div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                    <div class="panel panel-success">
-                        <div class="panel-heading">
-                          <h2> <%= @service_request.title %></h2>
-                        </div>
-                        <div class="panel-body2" style="padding:20px">
-
-                          <p>
-                            <%= @service_request.description %>
-                          </p>
-                        </div>
-                          <div class="panel-body2">
-
-                          <% if @service_request.requested_by_id == @current_user.id %>
-                            <button class="btn btn-success btn-md"><%= link_to 'Edit this request', edit_service_request_path(@service_request) %></button> 
-                          <% end %>
-                          
-                          <% if @service_request.recipient == @current_user %>                
-                                        <td><button class="btn btn-success btn-md"><%= link_to 'Remove', @service_request, method: :delete, data: { confirm: 'Are you sure?' } %></button></td>        
-                                        <% end %>
-
-                          <br><br>
-                          <h2>
-                          <% if !(@service_request.requested_by_id == @current_user.id) %>
-                            <center><button class="btn btn-success btn-lg"><%= link_to 'I can help with this!', create_exchange_path(@service_request) %></button></center>
-                          <% end %>
-                          </h2>
-                          <div class="panel-footer">
-                            <p>
-                            <strong>Estimated hours:</strong>
-                            <%= @service_request.estimated_hours %>
-                          </p>
-
-                          <p>
-                            <strong>Location:</strong>
-                            <%= @service_request.location %>
-                          </p>
-
-                          <p>
-                            <strong>Timing:</strong>
-                            <%= @service_request.timing %>
-                          </p>
-
-                          <p>
-                            <strong>Requested by:</strong>
-                            <%= @service_request.recipient.first_name %>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+          <!-- show button to offer help and generate exchange page, but only if the current user is not the requester of this post -->
+          <h2>
+            <% if !(@service_request.requested_by_id == @current_user.id) %>
+              <center><button class="btn btn-success btn-lg"><%= link_to 'I can help with this!', create_exchange_path(@service_request) %></button></center>
+            <% end %>
+          </h2>
+          <div class="panel-footer">
+            <p>
+              <strong>Estimated hours:</strong>
+              <%= @service_request.estimated_hours %>
+            </p>
+            <p>
+              <strong>Location:</strong>
+              <%= @service_request.location %>
+            </p>
+            <p>
+              <strong>Timing:</strong>
+               <%= @service_request.timing %>
+            </p>
+            <p>
+              <strong>Requested by:</strong>
+              <%= @service_request.recipient.first_name %>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
