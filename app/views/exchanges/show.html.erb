@@ -1,38 +1,37 @@
-
 <center><h2>My Exchange Timeline</h2></center>
 <br>
 <center>
-       <!-- ACCEPT a proposed exchange -->
-		<!-- Only allow the counter-party to the Proposed Exchange to accept (i.e., the person who did not propose it) -->
+  <!-- ACCEPT a proposed exchange -->
+	<!-- Only allow the counter-party to the Proposed Exchange to accept (i.e., the person who did not propose it) -->
 
-		<!-- flash error if insufficient balance -->
-		<% if flash[:error] %>
-			<br><br>
-			<div class="error"><%= flash[:error] %></div>
-		<% end %>
+	<!-- flash error if insufficient balance -->
+	<% if flash[:error] %>
+		<br><br>
+		<div class="error"><%= flash[:error] %></div>
+	<% end %>
 
-			<% if @exchange.stage[:stage_number] == 1 %>
-			<% if @exchange.accepting_party == current_user %>
+	<% if @exchange.stage[:stage_number] == 1 %>
+		<% if @exchange.accepting_party == current_user %>
 			<h2>
 				<button class="btn btn-default btn-md" ><%= link_to 'Accept this proposal', accept_exchange_path(@exchange) %></button>
 			</h2>
-			<% end %>
 		<% end %>
+	<% end %>
 
-    <!-- DELIVER an accepted exchange -->
+  <!-- DELIVER an accepted exchange -->
 	<!-- Only allow the PROVIDER of the Accepted Exchange to deliver -->
 	<!-- Use form to let PROVIDER enter actual final hours -->
 
 	<% if @exchange.stage[:stage_number] == 2 %>
-	 <% if @exchange.provider == current_user %>
+	  <% if @exchange.provider == current_user %>
 
-		<%= form_for(@exchange, url: deliver_exchange_path(@exchange), html: {method: "get"}) do |f| %>
-How long did service take?
-		<%= f.text_field :final_hours, placeholder: "Number of hours" %>
-		<%= f.submit "Confirm service delivered" %>
-
-	    <% end %>
-	<% end %>
+  		<%= form_for(@exchange, url: deliver_exchange_path(@exchange), html: {method: "get"}) do |f| %>
+        How long did service take?
+  		  <%= f.text_field :final_hours, placeholder: "Number of hours" %>
+  		  <%= f.submit "Confirm service delivered" %>
+  	  <% end %>
+	
+    <% end %>
   <% end %>
 
 	<!-- CONFIRM a delivered exchange -->
@@ -41,132 +40,139 @@ How long did service take?
 
 	<% if @exchange.stage[:stage_number] == 3 %>
 	  <% if @exchange.recipient == current_user %>
-		<h2>
-         <button class="btn btn-default btn-md" ><%= link_to 'Confirm that you received this exchange', confirm_exchange_path(@exchange) %></button>
-		</h2>
+		  <h2>
+        <button class="btn btn-default btn-md" ><%= link_to 'Confirm that you received this exchange', confirm_exchange_path(@exchange) %></button>
+		  </h2>
 	  <% end %>
 	<% end %>
-	</center>
-
-	<br><br>
-
-<div class="container">
-	<div class= "col-md-4 col-md-8 col-md-offset-2">
-        <div class="panel panel-success">
-            <div class="panel-heading">
-                <div class="row">
-                   <div class="col-xs-3">
-                       <i class="fa fa-tasks fa-5x"></i>
-                   </div>
-               <div class="col-md-6 text-right" style="padding:20px">
-                    <div class="huge"><%= @exchange.estimated_hours %></div>
-                       <center><div>Estimated Hours</div></center>
-                </div>
-                <br><br>
-                <div class="col-md-6 text-center" style="padding:20px">
-                <div class="huge"><%= @exchange.final_hours %></div>
-                       <center><div>Final Hours</div></center>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="container">
-<div class="col-md-4 col-md-8 ">
-<div class="panel panel-success">
-<center>
-	<h1><%= @exchange.title %></h1>
-<br>
-<h3>Provided by <%= @exchange.provider.first_name %></h3>
-	<h4><% if @exchange.stage[:stage_number] >= 2 %>
-	  <%= @exchange.provider.email %>
-	<% end %></h4>
-<br>
-<h3>For <%= @exchange.recipient.first_name %></h3>
-	<h4><% if @exchange.stage[:stage_number] >= 2 %>
-	  <%= @exchange.recipient.email %><br>
-	<% end %></h4>
-
-<h4>Current status: <%= @exchange.stage[:stage_name] %></h4><br>
-<p><%= @exchange.description %></p><br>
-Location: <%= @exchange.location %><br>
 </center>
 
+<br><br>
 
-</div>
-</div>
-</div>
+<!-- container/box with exchange hours -->
+<div class="container">
+	<div class= "col-md-4 col-md-8 col-md-offset-2">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-xs-3">
+            <i class="fa fa-tasks fa-5x"></i>
+          </div>
+          <div class="col-md-6 text-center" style="padding:20px">
+            <div class="huge"><%= @exchange.estimated_hours %></div>
+            <br>
+            <center><div><strong>Estimated Hours</strong></div></center>
+          </div>
+          <br><br>
+          <div class="col-md-6 text-center" style="padding:20px">
+            <div class="huge"><%= @exchange.final_hours %></div>
+            <center><div><strong>Final Hours</strong></div></center>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <!-- container with exchange information -->
+  <div class="container">
+    <div class="col-md-4 col-md-8 ">
+      <div class="panel panel-success">
+        <center>
+  	      <h1><%= @exchange.title %></h1>
+          <br>
+          <h4><strong>Current status: <%= @exchange.stage[:stage_name] %></strong></h4>
+          <h3>Provided by <%= @exchange.provider.first_name %></h3>
+  	      <!-- show email address if exchange has been accepted -->
+          <h4><% if @exchange.stage[:stage_number] >= 2 %>
+  	        <%= @exchange.provider.email %>
+  	      <% end %></h4>
+          <h3>For <%= @exchange.recipient.first_name %></h3>
+          <!-- show email address if exchange has been accepted -->
+          <h4><% if @exchange.stage[:stage_number] >= 2 %>
+  	        <%= @exchange.recipient.email %>
+  	      <% end %></h4>
+          <p><%= @exchange.description %></p><br>
+          <p>Location: <%= @exchange.location %></p><br>
+        </center>
+      </div>
+    </div>
+  </div>
 
-<div class="col-md-8 col-md-offset-2">
-<div class="panel panel-green">
-<div class="panel-heading">
-
-</div>
-<!-- /.panel-heading -->
-<div class="panel-body">
-    <ul class="timeline">
-        <li>
-            <div class="timeline-badge"><i class="fa fa-check"></i>
+  <!-- exchanged timeline -->
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-green">
+      <div class="panel-heading">
+        <!-- no text in heading, just green bar -->
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body">
+        <ul class="timeline">
+          
+          <!-- proposed panel -->
+          <li>
+            <div class="timeline-badge">
+              <i class="fa fa-check"></i>
             </div>
             <div class="timeline-panel">
-                <div class="timeline-heading">
-                    <h4 class="timeline-title">Proposed</h4>
-                    <center> <p><small class="text-muted"><i class="fa fa-clock-o"></i><br> <%= @exchange.proposed_date %></small><br></p></center>
-                </div>
-                <div class="timeline-body">
-
-                </div>
+              <div class="timeline-heading">
+                <h4 class="timeline-title">Proposed</h4>
+              </div>
+              <div class="timeline-body">
+                <center> <p class="text-muted"><i class="fa fa-clock-o"></i><br> <%= @exchange.proposed_date %></p><br></center>
+              </div>
             </div>
-        </li>
-        <li class="timeline-inverted">
-            <div class="timeline-badge warning"><i class="fa fa-credit-card"></i>
+          </li>
+          
+          <!-- accepted panel -->
+          <li class="timeline-inverted">
+            <div class="timeline-badge warning">
+              <i class="fa fa-credit-card"></i>
             </div>
             <div class="timeline-panel">
-                    <div class="timeline-heading">
-                                    <h4 class="timeline-title">Accepted</h4>
-                                    <center> <p><small class="text-muted"><i class="fa fa-clock-o"></i><br> <%= @exchange.accepted_date %></small><br></p></center>
-                                </div>
-                                <div class="timeline-body">
-                                  
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="timeline-badge danger"><i class="fa fa-bomb"></i>
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4 class="timeline-title">Delivered</h4>
-                                     <center> <p><small class="text-muted"><i class="fa fa-clock-o"></i><br> <%= @exchange.delivered_date %></small><br></p></center>
-                                </div>
-                                <div class="timeline-body">
-                                  
-                                </div>
-                            </div>
-                        </li>
-                        
-                        <li class="timeline-inverted">
-                            <div class="timeline-badge success"><i class="fa fa-graduation-cap"></i>
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4 class="timeline-title">Confirmed</h4>
-                                     <center> <p><small class="text-muted"><i class="fa fa-clock-o"></i><br> <%= @exchange.confirmed_date %></small><br></p></center>
-                                </div>
-                                <div class="timeline-body">
-                                   
-                                </div>
-                            </div>
-                        </li>
-                            </ul>
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div>
-
+              <div class="timeline-heading">
+                <h4 class="timeline-title">Accepted</h4>
+              </div>
+              <div class="timeline-body">
+                <center> <p class="text-muted"><i class="fa fa-clock-o"></i><br> <%= @exchange.accepted_date %></p><br></center>         
+              </div>
+            </div>
+          </li>
+          
+          <!-- delivered panel -->
+          <li>
+            <div class="timeline-badge danger">
+              <i class="fa fa-bomb"></i>
+            </div>
+            <div class="timeline-panel">
+              <div class="timeline-heading">
+                <h4 class="timeline-title">Delivered</h4>
+              </div>
+              <div class="timeline-body">
+                <center> <p class="text-muted"><i class="fa fa-clock-o"></i><br> <%= @exchange.delivered_date %></p><br></center>
+              </div>
+            </div>
+          </li>
+                          
+          <!-- confirmed panel -->
+          <li class="timeline-inverted">
+            <div class="timeline-badge success">
+              <i class="fa fa-graduation-cap"></i>
+            </div>
+            <div class="timeline-panel">
+              <div class="timeline-heading">
+                <h4 class="timeline-title">Confirmed</h4>
+              </div>
+              <div class="timeline-body">
+                <center> <p class="text-muted"><i class="fa fa-clock-o"></i><br> <%= @exchange.confirmed_date %></p><br></center>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <!-- /.panel-body -->
+    </div>
+    <!-- /.panel -->
+  </div>
 </div>
 
 
