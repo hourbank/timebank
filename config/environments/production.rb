@@ -76,4 +76,8 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # addeding these to solve no background image issue on Heroku
+  config.serve_static_assets = true
+  config.assets.compile = true
 end

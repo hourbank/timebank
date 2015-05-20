@@ -52,9 +52,11 @@ group :development, :test do
   gem 'spring'
 
   #Installing Rspec
-  group :development, :test do
   gem 'rspec-rails', '~> 3.0'
-  end
 
+end
+
+group :production do
+  gem 'rails_12factor'
 end
 
