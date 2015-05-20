@@ -135,4 +135,5 @@ before_action :your_exchange?, only: [:show, :accept_exchange, :confirm_exchange
 	      redirect_to users_account_path
 	    end
   end
+
 end

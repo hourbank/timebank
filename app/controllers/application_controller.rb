@@ -29,8 +29,6 @@ class ApplicationController < ActionController::Base
     # New real SID
     account_sid = 'AC91d1e215d5a331ce1abc7decf99384cd' 
 
-    # NEED TO HIDE AUTHORIZATION TOKEN
-
     auth_token = ENV["api_authorization_token"]
 
 	  @client = Twilio::REST::Client.new account_sid, auth_token
