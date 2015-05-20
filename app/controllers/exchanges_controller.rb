@@ -34,10 +34,6 @@ before_action :your_exchange?, only: [:show, :accept_exchange, :confirm_exchange
 		redirect_to exchange_path(@proposed_exchange)
 	end
 
-	# def show
-	# 	proposal_by_provider_mike
-	# end
-
 	def show
 		@exchange = Exchange.find(params[:id])
 	end
